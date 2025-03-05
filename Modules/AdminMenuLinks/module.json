@@ -1,0 +1,11 @@
+{
+    "name": "AdminMenuLinks",
+    "alias": "adminmenulinks",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AdminMenuLinks\\Providers\\AdminMenuLinksServiceProvider"
+    ],
+    "files": []
+}
