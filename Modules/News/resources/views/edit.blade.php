@@ -40,6 +40,11 @@
                                             <label for="inputText1" class="inline-block mb-2 text-base font-medium">Xəbər başlığı ({{$language->code}})<span class="text-red-500">*</span></label>
                                             <input type="text" id="inputText1" name="title[{{ $language->code }}]" value="{{ old('title.' . $language->code, $news->getTranslation('title', $language->code)) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="inputText1" class="inline-block mb-2 text-base font-medium">Slug ({{$language->code}})<span class="text-red-500">*</span></label>
+                                            <input type="text" id="inputText1" name="slug[{{ $language->code }}]" value="{{ old('slug.' . $language->code, $news->getTranslation('slug', $language->code)) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                                        </div>
                                         <div class="mb-3">
                                             <label for="textArea" class="inline-block mb-2 text-base font-medium">Qısa təsvir ({{$language->code}})</label>
                                             <textarea name="short_description[{{ $language->code }}]" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('short_description.' . $language->code, $news->getTranslation('short_description', $language->code)) }}</textarea>
@@ -97,7 +102,7 @@
                                     @endif
                             </div>
 
-                   
+
 
 
                             <div class="grid grid-cols-1 gap-x-5 sm:grid-cols-2">

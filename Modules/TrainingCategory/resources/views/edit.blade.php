@@ -54,6 +54,11 @@
                                         <label for="seo_description_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">Seo açıqlama ({{ $language->code }})</label>
                                         <textarea name="seo_description[{{ $language->code }}]" id="seo_description_{{ $language->code }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500" rows="3">{{ old('seo_description.' . $language->code, $trainingcategory->getTranslation('seo_description', $language->code)) }}</textarea>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="slug{{ $language->code }}" class="inline-block mb-2 text-base font-medium">Slug ({{ $language->code }})<span class="text-red-500">*</span></label>
+                                        <input type="text" id="slug_{{ $language->code }}" name="slug[{{ $language->code }}]" value="{{ old('slug.' . $language->code, $trainingcategory->getTranslation('slug', $language->code)) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    </div>
                                 </div>
                             </div>
                             @php

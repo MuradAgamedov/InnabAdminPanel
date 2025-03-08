@@ -49,7 +49,7 @@ class VideoLessonsCategoryController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new VideoLessonsCategory(), $request);
+            $this->services->crudService->create(new VideoLessonsCategory(), $request, null, true);
             return redirect()->route('videolessonscategory.index')->with('status', 'Kateqoriya uğurla əlavə edildi');
         }, 'videolessonscategory.index');
     }
@@ -77,7 +77,7 @@ class VideoLessonsCategoryController extends Controller
     public function update(Request $request, VideoLessonsCategory $videolessonscategory): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request, $videolessonscategory) {
-            $this->services->crudService->update($videolessonscategory, $request);
+            $this->services->crudService->update($videolessonscategory, $request,null, true);
             return redirect()->route('videolessonscategory.index')->with('status', 'Kateqoriya uğurla yeniləndi');
         }, 'videolessonscategory.index');
     }

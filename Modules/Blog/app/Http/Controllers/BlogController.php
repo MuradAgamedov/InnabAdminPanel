@@ -44,7 +44,7 @@ class BlogController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new Blog(), $request, 'blog');
+            $this->services->crudService->create(new Blog(), $request, 'blog', true);
             return redirect()->route('blog.index')->with('status', 'Bloq uğurla əlavə edildi');
         }, 'blog.index');
     }
@@ -68,7 +68,7 @@ class BlogController extends Controller
     {
         return $this->executeSafely(function () use ($request, $id) {
             $partner = $this->repository->find($id);
-            $this->services->crudService->update($partner, $request, 'blog');
+            $this->services->crudService->update($partner, $request, 'blog', true);
             return redirect()->route('blog.index')->with('status', 'Bloq uğurla əlavə edildi');
         }, 'blog.index');
     }
@@ -98,7 +98,7 @@ class BlogController extends Controller
         return $this->commonService->deleteFile($id, $this->services->imageService, 'blog.index');
     }
 
-    
+
   public function changeOrderUp($id) {
 
         $this->services->orderService->up(new Blog, $id);

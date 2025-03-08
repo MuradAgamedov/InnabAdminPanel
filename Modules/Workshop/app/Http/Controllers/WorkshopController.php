@@ -48,7 +48,7 @@ class WorkshopController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new Workshop(), $request, 'workshop');
+            $this->services->crudService->create(new Workshop(), $request, 'workshop', true);
             return redirect()->route('workshop.index')->with('status', 'Workshop uğurla əlavə edildi');
         }, 'workshop.index');
     }
@@ -80,7 +80,7 @@ class WorkshopController extends Controller
     {
         return $this->commonService->executeSafely(function () use ($request, $id) {
             $model = $this->repository->find($id);
-            $this->services->crudService->update($model, $request, 'workshop');
+            $this->services->crudService->update($model, $request, 'workshop', true);
             return redirect()->route('workshop.index')->with('status', 'Workshop uğurla yeniləndi');
         }, 'workshop.index');
     }

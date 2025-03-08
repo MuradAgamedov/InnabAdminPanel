@@ -39,7 +39,7 @@ class BlogCategoryController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new BlogCategory(), $request);
+            $this->services->crudService->create(new BlogCategory(), $request, null, true);
             return redirect()->route('blogcategory.index')->with('status', 'Kateqoriya uğurla əlavə edildi');
         }, 'blogcategory.index');
     }
@@ -58,7 +58,7 @@ class BlogCategoryController extends Controller
     public function update(Request $request, BlogCategory $blogcategory): RedirectResponse
     {
         return $this->executeSafely(function () use ($request, $blogcategory) {
-            $this->services->crudService->update($blogcategory, $request);
+            $this->services->crudService->update($blogcategory, $request,null, true);
             return redirect()->route('blogcategory.index')->with('status', 'Kateqoriya uğurla yeniləndi');
         }, 'blogcategory.index');
     }
@@ -83,7 +83,7 @@ class BlogCategoryController extends Controller
         return $this->commonService->deleteSelectedItems($this->repository, $request, $this->services->removeService, 'blogcategory.index');
     }
 
-    
+
   public function changeOrderUp($id) {
         $this->services->orderService->up(new BlogCategory, $id);
         return redirect()->back();

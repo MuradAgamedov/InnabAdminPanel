@@ -50,7 +50,7 @@ class VideoLessonsTitleController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new VideoLessonsTitle(), $request, 'image');
+            $this->services->crudService->create(new VideoLessonsTitle(), $request, 'image', true);
             return redirect()->route('videolessonstitle.index')->with('status', 'Başlıq uğurla əlavə edildi');
         }, 'videolessonstitle.index');
     }
@@ -79,7 +79,7 @@ class VideoLessonsTitleController extends Controller
     public function update(Request $request, VideoLessonsTitle $videolessonstitle): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request, $videolessonstitle) {
-            $this->services->crudService->update($videolessonstitle, $request, 'image');
+            $this->services->crudService->update($videolessonstitle, $request, 'image', true);
             return redirect()->route('videolessonstitle.index')->with('status', 'Başlıq uğurla yeniləndi');
         }, 'videolessonstitle.index');
     }

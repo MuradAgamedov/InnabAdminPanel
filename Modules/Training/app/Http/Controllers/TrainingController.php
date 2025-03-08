@@ -51,7 +51,7 @@ class TrainingController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new Training(), $request, 'training');
+            $this->services->crudService->create(new Training(), $request, 'training', true);
             return redirect()->route('training.index')->with('status', 'Təlim uğurla əlavə edildi');
         }, 'training.index');
     }
@@ -82,7 +82,7 @@ class TrainingController extends Controller
     public function update(Request $request, Training $training): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request, $training) {
-            $this->services->crudService->update($training, $request, 'training');
+            $this->services->crudService->update($training, $request, 'training', true);
             return redirect()->route('training.index')->with('status', 'Təlim uğurla yeniləndi');
         }, 'training.index');
     }

@@ -48,7 +48,7 @@ class VebinarController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new Vebinar(), $request, 'vebinar');
+            $this->services->crudService->create(new Vebinar(), $request, 'vebinar', true);
             return redirect()->route('vebinar.index')->with('status', 'Vebinar uğurla əlavə edildi');
         }, 'vebinar.index');
     }
@@ -80,7 +80,7 @@ class VebinarController extends Controller
     {
         return $this->commonService->executeSafely(function () use ($request, $id) {
             $model = $this->repository->find($id);
-            $this->services->crudService->update($model, $request, 'vebinar');
+            $this->services->crudService->update($model, $request, 'vebinar', true);
             return redirect()->route('vebinar.index')->with('status', 'Vebinar uğurla yeniləndi');
         }, 'vebinar.index');
     }

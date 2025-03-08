@@ -50,7 +50,7 @@ class LessonController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new Lesson(), $request, 'lesson');
+            $this->services->crudService->create(new Lesson(), $request, 'lesson', true);
             return redirect()->route('lesson.index')->with('status', 'Dərs uğurla əlavə edildi');
         }, 'lesson.index');
     }
@@ -79,7 +79,7 @@ class LessonController extends Controller
     public function update(Request $request, Lesson $lesson): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request, $lesson) {
-            $this->services->crudService->update($lesson, $request, 'lesson');
+            $this->services->crudService->update($lesson, $request, 'lesson', true);
             return redirect()->route('lesson.index')->with('status', 'Dərs uğurla yeniləndi');
         }, 'lesson.index');
     }

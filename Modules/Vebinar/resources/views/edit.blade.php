@@ -40,6 +40,11 @@
                                             <label for="inputText1" class="inline-block mb-2 text-base font-medium">Vebinar adı ({{$language->code}})<span class="text-red-500">*</span></label>
                                             <input type="text" id="inputText1" name="title[{{ $language->code }}]" value="{{ old('title.' . $language->code, $model->getTranslation('title', $language->code)) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="inputText1" class="inline-block mb-2 text-base font-medium">Slug ({{$language->code}})<span class="text-red-500">*</span></label>
+                                            <input type="text" id="inputText1" name="slug[{{ $language->code }}]" value="{{ old('slug.' . $language->code, $model->getTranslation('slug', $language->code)) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                                        </div>
                                         <div class="mb-3">
                                             <label for="textArea" class="inline-block mb-2 text-base font-medium">Spikerlər - vergül ilə sıra ilə yaz ({{$language->code}})</label>
                                             <textarea name="spikers[{{ $language->code }}]" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('spikers.' . $language->code, $model->getTranslation('spikers', $language->code)) }}</textarea>
@@ -48,10 +53,10 @@
                                             <label for="textArea" class="inline-block mb-2 text-base font-medium">Ünvan ({{$language->code}})</label>
                                             <textarea name="place[{{ $language->code }}]" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('place.' . $language->code, $model->getTranslation('place', $language->code)) }}</textarea>
                                         </div>
-                                        
+
                                       <div style="margin-bottom: 10px">
                                         <div style="display: flex; column-gap: 5px">
-                                        
+
                                             @foreach($model->images->where('type', 'like', "image_$language->code") as $image)
                                                 <div style="position: relative; width: 250px; height: 250px;">
                                                     <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
@@ -64,7 +69,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                               
+
                                     <div class="mb-3">
                                         <label for="textArea" class="inline-block mb-2 text-base font-medium">Şəkil ({{$language->code}})</label>
                                         @if($model->images->where('type', 'like', "image_$language->code")->count() < 1)

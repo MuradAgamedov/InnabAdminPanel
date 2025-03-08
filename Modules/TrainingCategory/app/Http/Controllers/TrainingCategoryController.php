@@ -48,7 +48,7 @@ class TrainingCategoryController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new TrainingCategory(), $request);
+            $this->services->crudService->create(new TrainingCategory(), $request, null, true );
             return redirect()->route('trainingcategory.index')->with('status', 'Kateqoriya uğurla əlavə edildi');
         }, 'trainingcategory.index');
     }
@@ -76,7 +76,7 @@ class TrainingCategoryController extends Controller
     public function update(Request $request, TrainingCategory $trainingcategory): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request, $trainingcategory) {
-            $this->services->crudService->update($trainingcategory, $request);
+            $this->services->crudService->update($trainingcategory, $request, null, true);
             return redirect()->route('trainingcategory.index')->with('status', 'Kateqoriya uğurla yeniləndi');
         }, 'trainingcategory.index');
     }

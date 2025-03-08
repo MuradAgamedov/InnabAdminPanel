@@ -83,12 +83,15 @@
                                                 <input multiple name="education_plan_{{$language->code}}" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                             </div>
 
-                                    
+
                                             <div class="mb-3">
                                                 <label for="textArea" class="inline-block mb-2 text-base font-medium">Təlimin daxili şəkli ({{$language->code}})</label>
                                                 <input multiple name="main_image_training_{{$language->code}}" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                             </div>
-
+                                            <div class="mb-3">
+                                                <label for="inputText1" class="inline-block mb-2 text-base font-medium">Slug ({{$language->code}})</label>
+                                                <input type="text" id="inputText1" name="slug[{{ $language->code }}]" value="{{ old('slug.' . $language->code) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                                            </div>
                                         </div>
                                     </div>
                                     @php
@@ -101,7 +104,7 @@
                                 <label for="textArea" class="inline-block mb-2 text-base font-medium">İkon</label>
                                 <input multiple name="image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                             </div>
-                        
+
                             <div class="grid grid-cols-1 gap-x-5 sm:grid-cols-2">
                                 <div class="mb-3">
                                     <label for="textArea" class="inline-block mb-2 text-base font-medium">Seo linklər</label>
@@ -120,6 +123,8 @@
                                     @endforeach
                                 </select>
                             </div>
+
+
                             <button type="submit" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
                                 Əlavə et
                             </button>

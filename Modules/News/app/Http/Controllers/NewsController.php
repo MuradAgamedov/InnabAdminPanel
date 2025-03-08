@@ -50,7 +50,7 @@ class NewsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new News(), $request, 'news');
+            $this->services->crudService->create(new News(), $request, 'news', true);
             return redirect()->route('news.index')->with('status', 'Xəbər uğurla əlavə edildi');
         }, 'news.index');
     }
@@ -82,7 +82,7 @@ class NewsController extends Controller
     {
         return $this->commonService->executeSafely(function () use ($request, $id) {
             $news = $this->repository->find($id);
-            $this->services->crudService->update($news, $request, 'news');
+            $this->services->crudService->update($news, $request, 'news', true);
             return redirect()->route('news.index')->with('status', 'Xəbər uğurla yeniləndi');
         }, 'news.index');
     }

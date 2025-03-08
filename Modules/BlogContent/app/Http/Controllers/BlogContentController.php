@@ -43,7 +43,7 @@ class BlogContentController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new ModelsBlogContent(), $request, 'blogcontent');
+            $this->services->crudService->create(new ModelsBlogContent(), $request, 'blogcontent', true);
             return redirect()->route('blogcontent.index')->with('status', 'Kontent uğurla əlavə edildi');
         }, 'blogcontent.index');
     }
@@ -67,7 +67,7 @@ class BlogContentController extends Controller
     {
         return $this->executeSafely(function () use ($request, $id) {
             $partner = $this->repository->find($id);
-            $this->services->crudService->update($partner, $request, 'blogcontent');
+            $this->services->crudService->update($partner, $request, 'blogcontent', true);
             return redirect()->route('blogcontent.index')->with('status', 'Kontent uğurla yeniləndi');
         }, 'blogcontent.index');
     }

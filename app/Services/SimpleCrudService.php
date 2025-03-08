@@ -13,28 +13,35 @@ class SimpleCrudService
     ) {
     }
 
-    public function create($model = null, $request = null, $model_type = null)
+    public function create($model = null, $request = null, $model_type = null, $dynamicSlug=false)
     {
-        DB::transaction(function () use ($model, $request, $model_type) {
+        DB::transaction(function () use ($dynamicSlug, $model, $request, $model_type) {
             $data = $request->except(array_keys($request->file()));
-            if (isset($data['title'])) {
-                $data['slug'] = $this->slugService->sluggableArray($data['title']);
+            if(!$dynamicSlug) {
+                if (isset($data['title'])) {
+                    $data['slug'] = $this->slugService->sluggableArray($data['title']);
+                }
             }
+
             $entity = $model::create($data);
             $this->handleFilesAndImages($request, $entity->id, $model_type);
         });
     }
 
-    public function update($model = null, $request = null, $model_type = null)
+    public function update($model = null, $request = null, $model_type = null, $dynamicSlug=false)
     {
-        DB::transaction(function () use ($model, $request, $model_type) {
+        DB::transaction(function () use ($dynamicSlug, $model, $request, $model_type) {
             $exept = array_keys($request->file());
             $exept['page'] = 'page';
             $exept['q'] = 'q';
             $data = $request->except($exept);
-            if (isset($data['title'])) {
-                $data['slug'] = $this->slugService->sluggableArray($data['title']);
+
+            if(!$dynamicSlug) {
+                if (isset($data['title'])) {
+                    $data['slug'] = $this->slugService->sluggableArray($data['title']);
+                }
             }
+
             $model->update($data);
             $this->handleFilesAndImages($request, $model->id, $model_type);
         });

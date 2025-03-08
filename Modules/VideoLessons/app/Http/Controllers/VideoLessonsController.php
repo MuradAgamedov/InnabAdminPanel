@@ -54,7 +54,7 @@ class VideoLessonsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->commonService->executeSafely(function () use ($request) {
-            $this->services->crudService->create(new VideoLessons(), $request, 'videolesson');
+            $this->services->crudService->create(new VideoLessons(), $request, 'videolesson', true);
             return redirect()->route('videolessons.index')->with('status', 'Tərəfdaş uğurla əlavə edildi');
         }, 'videolessons.index');
     }
@@ -87,7 +87,7 @@ class VideoLessonsController extends Controller
     {
         return $this->commonService->executeSafely(function () use ($request, $id) {
             $partner = $this->repository->find($id);
-            $this->services->crudService->update($partner, $request, 'videolesson');
+            $this->services->crudService->update($partner, $request, 'videolesson', true);
             return redirect()->route('videolessons.index')->with('status', 'Təlim uğurla əlavə edildi');
         }, 'videolessons.index');
     }
