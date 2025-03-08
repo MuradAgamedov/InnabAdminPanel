@@ -35,5 +35,6 @@
     "UserRole": true,
     "Admin": true,
     "AdminMenuLinks": true,
-    "Calculator": true
+    "Calculator": true,
+    "Redirect": true
 }

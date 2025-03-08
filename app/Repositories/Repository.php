@@ -28,7 +28,10 @@ abstract class Repository
     {
         return $this->modelClass::orderBy('order')->paginate($limit);
     }
-
+    public function allWithoutOrder($limit = 1)
+    {
+        return $this->modelClass::paginate($limit);
+    }
     abstract public function search($query, $limit = 1);
 
     public function find($id)
@@ -67,25 +70,25 @@ abstract class Repository
 
         public function getTrainingByCategoryWith($relation, $relation_id, $relations = [])
         {
-    
+
             $model = new $this->modelClass;
 
-    
+
             $query = $model::where($relation, $relation_id);
 
-           
+
             if (Schema::hasColumn($model->getTable(), 'order')) {
                 $query->orderBy('order');
             } else {
                 $query->orderBy('id');
             }
 
-           
+
             if (Schema::hasColumn($model->getTable(), 'status')) {
                 $query->where('status', 1);
             }
 
-     
+
             return $query->with($relations)->get();
         }
 
