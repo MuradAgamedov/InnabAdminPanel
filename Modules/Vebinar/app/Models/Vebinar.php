@@ -16,7 +16,7 @@ class Vebinar extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['title', 'slug', 'spikers', 'place'];
+    public $translatable = ['title', 'slug', 'spikers', 'place', 'image_alt'];
 
     protected static function boot()
     {

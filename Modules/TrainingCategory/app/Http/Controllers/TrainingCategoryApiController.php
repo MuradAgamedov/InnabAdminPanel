@@ -29,7 +29,7 @@ class TrainingCategoryApiController extends Controller
         if ($items->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'No data found'], 404);
         }
-  
+
         $arr = $items->map(function ($item) use ($lang) {
             return [
                 'id' => $item->id,
@@ -47,11 +47,11 @@ class TrainingCategoryApiController extends Controller
                         'id' => $item->id,
                         'title' => $item->title,
                         'icon' => $item->images ? config('app.url') . '/' . $image : null,
-                        'main_image' => optional($item->main_images)->where('type', "main_image_training_".$lang)->first() 
-                            ? config('app.url') . '/' . optional($item->main_images)->where('type', "main_image_training_".$lang)->first()->url 
+                        'main_image' => optional($item->main_images)->where('type', "main_image_training_".$lang)->first()
+                            ? config('app.url') . '/' . optional($item->main_images)->where('type', "main_image_training_".$lang)->first()->url
                             : null,
                         'file' => optional($item->files)->where('type', "education_plan_".$lang)->first()
-                            ? config('app.url') . '/' . optional($item->files)->where('type', "education_plan_".$lang)->first()->url 
+                            ? config('app.url') . '/' . optional($item->files)->where('type', "education_plan_".$lang)->first()->url
                             : null,
                         'slug' => $item->slug,
                         'short_description' => $item->short_description,
@@ -65,6 +65,7 @@ class TrainingCategoryApiController extends Controller
                         'seo_description' => $item->seo_description,
                         'seo_links' => $item->seo_links,
                         'seo_scripts' => $item->seo_scripts,
+                        'image_alt' => $item->image_alt,
                     ];
                 })
             ];

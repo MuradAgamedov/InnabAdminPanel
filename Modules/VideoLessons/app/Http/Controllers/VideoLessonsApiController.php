@@ -45,6 +45,7 @@ class VideoLessonsApiController extends Controller
                 'seo_description' => $item->seo_description,
                 'seo_links' => $item->seo_links,
                 'seo_scripts' => $item->seo_scripts,
+                'image_alt_text' => $item->image_alt_text,
             ];
         });
 

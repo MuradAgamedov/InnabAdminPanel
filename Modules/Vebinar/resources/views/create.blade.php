@@ -56,6 +56,11 @@
                                                     <label for="textArea" class="inline-block mb-2 text-base font-medium">Şəkil ({{$language->code}})</label>
                                                     <input name="image_{{$language->code}}" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                                 </div>
+                                                {{-- Şəkil ALT Mətni --}}
+                                                <div class="mb-3">
+                                                    <label for="image_alt{{$language->code}}" class="inline-block mb-2 text-base font-medium">Şəkil ALT Mətni ({{$language->code}})</label>
+                                                    <input type="text" id="image_alt{{$language->code}}" name="image_alt[{{ $language->code }}]" value="{{ old('image_alt.' . $language->code) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                                </div>
                                             </div>
                                             @php
                                                 $isFirst = false;

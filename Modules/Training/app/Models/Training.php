@@ -22,7 +22,7 @@ class Training extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['title', 'seo_title', 'slug', 'seo_keywords', 'seo_description', "short_description", 'list', "top_text_title", 'top_text', "bottom_text_title", 'bottom_text'];
+    public $translatable = ['title', 'seo_title', 'slug', 'seo_keywords', 'seo_description', "short_description", 'list', "top_text_title", 'top_text', "bottom_text_title", 'bottom_text', 'image_alt'];
     protected static function boot()
     {
         parent::boot();

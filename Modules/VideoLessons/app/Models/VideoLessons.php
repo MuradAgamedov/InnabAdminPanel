@@ -17,7 +17,7 @@ class VideoLessons extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['title', 'slug', 'short_description', 'seo_title', 'seo_keywords', 'seo_description'];
+    public $translatable = ['title', 'slug', 'short_description', 'seo_title', 'seo_keywords', 'seo_description', 'image_alt_text'];
 
     protected static function boot()
     {

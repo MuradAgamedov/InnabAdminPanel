@@ -179,6 +179,11 @@
                                     <label for="inputText1" class="inline-block mb-2 text-base font-medium">Sıra<span class="text-red-500">*</span></label>
                                     <input type="number" id="inputText1" name="order" value="{{old('order', $training->order)}}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                 </div>
+                                {{-- Şəkil ALT Mətni --}}
+                                <div class="mb-3">
+                                    <label for="image_alt{{$language->code}}" class="inline-block mb-2 text-base font-medium">Şəkil ALT Mətni ({{$language->code}})</label>
+                                    <input type="text" id="image_alt{{$language->code}}" name="image_alt[{{ $language->code }}]" value="{{ old('image_alt.' . $language->code, $training->getTranslation('image_alt', $language->code)) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                </div>
                             </div>
 
 
