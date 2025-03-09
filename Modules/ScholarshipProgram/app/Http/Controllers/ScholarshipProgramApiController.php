@@ -36,6 +36,7 @@ class ScholarshipProgramApiController extends Controller
                     'image' => $item->image ? config('app.url') . '/' . $item->image['url'] : null,
                     'name' => $item->name,
                     'short_description' => $item->short_description,
+                    'image_alt' => $item->image_alt,
                 ];
             });
 

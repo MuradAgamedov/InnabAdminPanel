@@ -39,6 +39,7 @@ class WorkshopApiController extends Controller
                     'spikers' => array_map('trim', explode(',', $item->spikers)),
                     'event_datetime' => $item->event_datetime,
                     'place' => $item->place,
+                    'image_alt' => $item->image_alt,
                 ];
             });
 

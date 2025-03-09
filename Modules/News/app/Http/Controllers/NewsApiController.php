@@ -51,6 +51,7 @@ class NewsApiController extends Controller
                     'seo_scripts' => $item->seo_scripts,
                     'pined' => $item->pined,
                     'pined_order' => $item->pined_order,
+                    'image_alt' => $item->image_alt,
                 ];
             });
 
@@ -73,7 +74,7 @@ class NewsApiController extends Controller
     {
         return $this->executeSafely(function () use ($slug, $lang) {
             $item = $this->repository->getBySlug(News::class, $slug, ['image']);
-          
+
 
             if ($lang) {
                 app()->setLocale($lang);
