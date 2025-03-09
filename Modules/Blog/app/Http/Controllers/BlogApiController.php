@@ -116,7 +116,8 @@ public function get_blog_content($lang, $slug) {
             'seo_keywords' => $blog->seo_keywords,
             'seo_description' => $blog->seo_description,
             'seo_links' => $blog->seo_links,
-            'seo_scripts' => $blog->seo_scripts
+            'seo_scripts' => $blog->seo_scripts,
+                'image_alt_text' => $blog->image_alt_text,
         ];
 
         $contentData = $content->map(function ($item) {
