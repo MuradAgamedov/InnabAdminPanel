@@ -16,7 +16,17 @@ class Corporative extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['banner_title', 'banner_description', 'content_title', 'content_top_text', 'content_text', 'corporative_trainings'];
+    public $translatable = [
+        'banner_title',
+        'banner_description',
+        'content_title',
+        'content_top_text',
+        'content_text',
+        'corporative_trainings',
+        'banner_alt_text',   // Yeni əlavə edilən
+        'image_alt_text'     // Yeni əlavə edilən
+    ];
+
 
     protected static function boot()
     {

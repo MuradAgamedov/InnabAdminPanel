@@ -33,6 +33,12 @@
                                 <div class="mt-5 tab-content ">
                                     @php
                                     $isFirst = true;
+                                     $altFields = [
+                                        'icon_alt_text',          // Yeni əlavə edilən
+                                        'product_image_alt_text', // Yeni əlavə edilən
+                                        'qrcode_image_alt_text'  , // Yeni əlavə edilən
+                                        'mobile_qrcode_image_alt_text'   // Yeni əlavə edilən
+                                    ];
                                     @endphp
                                     @foreach($languages as $language)
                                     <div class="block tab-pane {{ $isFirst ? 'block' : 'hidden'}}" id="{{ $language->code }}">
@@ -87,6 +93,16 @@
                                                 <label for="requirements_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">Tələblər ({{ $language->code }})</label>
                                                 <textarea id="requirements_{{ $language->code }}" name="requirements[{{ $language->code }}]" class="ckeditortext form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">{{ old('product_description.' . $language->code, $project->getTranslation('requirements', $language->code)) }}</textarea>
                                             </div>
+                                            @foreach($altFields as $altField)
+                                                <div class="mb-3 w-full">
+                                                    <label for="{{ $altField }}_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">
+                                                        {{ ucwords(str_replace('_', ' ', $altField)) }} ({{ $language->code }})
+                                                    </label>
+                                                    <input type="text" name="{{ $altField }}[{{ $language->code }}]" id="{{ $altField }}_{{ $language->code }}"
+                                                           class="w-full form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                                           value="{{ old($altField . '.' . $language->code, $project->getTranslation($altField, $language->code)) }}">
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     @php
@@ -103,6 +119,7 @@
                             </div>
 
                             <div style="margin-bottom: 10px">
+                                <label for="textArea" class="inline-block mb-2 text-base font-medium">İkon</label>
                                 <div style="display: flex; column-gap: 5px">
                                     @foreach($project->images->where('type', 'image') as $image)
                                     <div style="position: relative; width: 50px; height: 50px;">
@@ -119,7 +136,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="textArea" class="inline-block mb-2 text-base font-medium">İkon</label>
+                                <label for="textArea" class="inline-block mb-2 text-base font-medium">Məhsul rəsmi</label>
                                 @if($project->images->where('type', 'image')->count() < 1) <input multiple name="image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                     @endif
 
@@ -143,12 +160,11 @@
 
 
                             <div class="mb-3">
-                                <label for="textArea" class="inline-block mb-2 text-base font-medium">Məhsul rəsmi</label>
                                 @if($project->images->where('type', 'product_image')->count() < 1) <input multiple name="product_image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                     @endif
                             </div>
 
-
+                            <label for="textArea" class="inline-block mb-2 text-base font-medium">QR kodu</label>
                             <div style="margin-bottom: 10px">
                                 <div style="display: flex; column-gap: 5px">
                                     @foreach($project->images->where('type', 'mobile_product_qr') as $image)
@@ -221,7 +237,7 @@
                             </div>
                        <div class="flex items-center gap-2">
                             <input type="hidden" name="is_corporative" value="0"> <!-- Checkbox seçilmədikdə null göndərilir -->
-                                <input id="checkboxDefault21" class="border rounded-sm appearance-none cursor-pointer size-4 bg-slate-100 border-slate-200 dark:bg-zinc-600 dark:border-zinc-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400" 
+                                <input id="checkboxDefault21" class="border rounded-sm appearance-none cursor-pointer size-4 bg-slate-100 border-slate-200 dark:bg-zinc-600 dark:border-zinc-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
                                     type="checkbox" value="1" name="is_corporative" @checked($project->is_corporative == 1)>
                                 <label for="checkboxDefault21" class="align-middle">
                                     Karyera mərkəzi
@@ -229,7 +245,7 @@
                             </div>
                             <div class="flex items-center gap-2 mb-2">
                                 <input type="hidden" name="is_project" value="0"> <!-- Checkbox seçilmədikdə null göndərilir -->
-                                <input id="checkboxDefault22" class="border rounded-sm appearance-none cursor-pointer size-4 bg-slate-100 border-slate-200 dark:bg-zinc-600 dark:border-zinc-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400" 
+                                <input id="checkboxDefault22" class="border rounded-sm appearance-none cursor-pointer size-4 bg-slate-100 border-slate-200 dark:bg-zinc-600 dark:border-zinc-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
                                     type="checkbox" value="1" name="is_project" @checked($project->is_project == 1)>
                                 <label for="checkboxDefault22" class="align-middle">
                                     Layihədir

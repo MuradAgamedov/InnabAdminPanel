@@ -16,7 +16,7 @@ class Partners extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['name', 'short_description'];
+    public $translatable = ['name', 'short_description', 'image_alt_text'];
 
     protected static function boot()
     {

@@ -60,6 +60,10 @@ class ProjectApiController extends Controller
                     'seo_scripts' => $item->seo_scripts,
                     'is_corporative' => $item->is_corporative,
                     'is_project' => $item->is_project,
+                    'icon_alt_text' => $item->icon_alt_text,
+                    'product_image_alt_text' => $item->product_image_alt_text,
+                    'qrcode_image_alt_text' => $item->qrcode_image_alt_text,
+                    'mobile_qrcode_image_alt_text' => $item->mobile_qrcode_image_alt_text,
                 ];
             });
 

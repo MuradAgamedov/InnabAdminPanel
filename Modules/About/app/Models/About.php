@@ -16,7 +16,7 @@ class About extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['description'];
+    public $translatable = ['description', 'icon_alt', 'image_alt'];
 
     protected static function boot()
     {

@@ -16,7 +16,16 @@ class SiteInfo extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['address'];
+    public $translatable = [
+        'address',
+        'header_logo_alt',
+        'footer_logo_alt',
+        'banner_image_alt',
+        'seminar_icon_alt',
+        'webinar_icon_alt',
+        'workshop_icon_alt',
+        'scholarship_icon_alt'
+    ];
 
     protected static function boot()
     {

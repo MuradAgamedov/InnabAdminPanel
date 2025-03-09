@@ -40,13 +40,16 @@ class CorporativeApiController extends Controller
 
         $data = [
             'image' => $item->image ? config('app.url') . '/' . $item->image['url'] : null,
+            'image_alt_text' => $item->image_alt_text,
             'banner' => $item->banner ? config('app.url') . '/' . $item->banner['url'] : null,
+            'banner_alt_text' => $item->banner_alt_text,
             'banner_title' => $item->banner_title,
             'banner_description' => $item->banner_description,
             'content_title' => $item->content_title,
             'content_top_text' => $item->content_top_text,
             'content_text' => $item->content_text,
             'corporative_trainings' => $trainingsArray, // Add transformed data here
+
         ];
 
         return response()->json(['success' => true, 'data' => $data]);
@@ -57,24 +60,24 @@ class CorporativeApiController extends Controller
 private function transformTrainings(string $trainings): array
 {
     $result = [];
-    
+
     // Split the string by ';' to get separate training sections
     $sections = explode(';', $trainings);
 
     foreach ($sections as $section) {
         // Split the title and trainings by ':'
         list($title, $trainingList) = explode(':', $section);
-        
+
         // Trim and split the trainings by ',' to get individual trainings
         $trainingsArray = array_map('trim', explode(',', $trainingList));
-        
+
         // Add the title and its related trainings to the result array
         $result[] = [
             'title' => trim($title),
             'trainings' => $trainingsArray
         ];
     }
-    
+
     return $result;
 }
 

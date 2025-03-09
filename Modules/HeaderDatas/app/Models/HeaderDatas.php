@@ -16,7 +16,7 @@ class HeaderDatas extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['sub_text'];
+    public $translatable = ['sub_text', 'icon_alt_text'];
 
     protected static function boot()
     {

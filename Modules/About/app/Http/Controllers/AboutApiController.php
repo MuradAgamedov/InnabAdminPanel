@@ -35,7 +35,9 @@ class AboutApiController extends Controller
                     'image' => $item->image ? config('app.url') . '/' . $item->image['url'] : null,
                     'icon' => $item->icon ? config('app.url') . '/' . $item->icon['url'] : null,
                     'date' => $item->date,
-                    'description' => $item->description
+                    'description' => $item->description,
+                    'icon_alt' => $item->icon_alt,
+                    'image_alt' => $item->image_alt
                 ];
             });
 

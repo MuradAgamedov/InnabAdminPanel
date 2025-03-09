@@ -5,7 +5,7 @@
         <div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
             <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center print:hidden">
                 <div class="grow">
-                    <h5 class="text-16">Təlim əlavə et</h5>
+                    <h5 class="text-16">Tərəfdaş əlavə et</h5>
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-x-5 xl:grid-cols-10">
@@ -28,8 +28,8 @@
                                     @endforeach
                                 </ul>
 
-                                <div style="border: 1px solid black; padding: 30px" class="mt-5 mb-4 tab-content ">
-                                    <div class="mt-5 tab-content ">
+                                <div style="border: 1px solid black; padding: 30px" class="mt-5 mb-4 tab-content">
+                                    <div class="mt-5 tab-content">
                                         @php
                                             $isFirst = true;
                                         @endphp
@@ -37,11 +37,17 @@
                                             <div class="block tab-pane {{ $isFirst ? 'block' : 'hidden'}}" id="{{$language->code}}">
                                                 <div class="mb-3">
                                                     <label for="inputText1" class="inline-block mb-2 text-base font-medium">Tərəfdaş adı ({{$language->code}})<span class="text-red-500">*</span></label>
-                                                    <input type="text" id="inputText1" name="name[{{ $language->code }}]" value="{{ old('name.' . $language->code) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                                                    <input type="text" id="inputText1" name="name[{{ $language->code }}]" value="{{ old('name.' . $language->code) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="textArea" class="inline-block mb-2 text-base font-medium">Qısa təsvir ({{$language->code}})</label>
-                                                    <textarea name="short_description[{{ $language->code }}]" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('short_description.' . $language->code) }}</textarea>
+                                                    <textarea name="short_description[{{ $language->code }}]" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500" id="textArea" rows="3">{{ old('short_description.' . $language->code) }}</textarea>
+                                                </div>
+
+                                                {{-- Şəkil ALT Mətni --}}
+                                                <div class="mb-3">
+                                                    <label for="image_alt_text_{{$language->code}}" class="inline-block mb-2 text-base font-medium">Şəkil ALT Mətni ({{$language->code}})</label>
+                                                    <input type="text" id="image_alt_text_{{$language->code}}" name="image_alt_text[{{ $language->code }}]" value="{{ old('image_alt_text.' . $language->code) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                                 </div>
                                             </div>
                                             @php
@@ -50,11 +56,13 @@
                                         @endforeach
                                     </div>
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="textArea" class="inline-block mb-2 text-base font-medium">Şəkil</label>
                                     <input name="image" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                                 </div>
-                                <button type="submit" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
+
+                                <button type="submit" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600">
                                     Əlavə et
                                 </button>
                             </form>
@@ -65,6 +73,7 @@
             <!-- container-fluid -->
         </div>
         @endsection
+
         @push('scripts')
             <script>
                 document.querySelectorAll('.ckeditortext').forEach((textarea) => {

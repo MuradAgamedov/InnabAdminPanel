@@ -32,6 +32,12 @@
                                 <div class="mt-5 tab-content ">
                                     @php
                                     $isFirst = true;
+                                     $altFields = [
+                                        'icon_alt_text',          // Yeni əlavə edilən
+                                        'product_image_alt_text', // Yeni əlavə edilən
+                                        'qrcode_image_alt_text'  , // Yeni əlavə edilən
+                                        'mobile_qrcode_image_alt_text'   // Yeni əlavə edilən
+                                    ];
                                     @endphp
                                     @foreach($languages as $language)
                                     <div class="block tab-pane {{ $isFirst ? 'block' : 'hidden'}}" id="{{ $language->code }}">
@@ -86,6 +92,17 @@
                                                 <label for="requirements_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">Tələblər ({{ $language->code }})</label>
                                                 <textarea id="requirements_{{ $language->code }}" name="requirements[{{ $language->code }}]" class="ckeditortext form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">{{ old('requirements.' . $language->code) }}</textarea>
                                             </div>
+
+                                            @foreach($altFields as $altField)
+                                                <div class="mb-3 w-full">
+                                                    <label for="{{ $altField }}_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">
+                                                        {{ ucwords(str_replace('_', ' ', $altField)) }} ({{ $language->code }})
+                                                    </label>
+                                                    <input type="text" name="{{ $altField }}[{{ $language->code }}]" id="{{ $altField }}_{{ $language->code }}"
+                                                           class="w-full form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                                           value="{{ old($altField . '.' . $language->code) }}">
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     @php
@@ -122,7 +139,7 @@
                                 <input type="text" id="apple_link" name="apple_link" value="{{ old('apple_link' ) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                             </div>
                             </div>
-                      
+
                             <div class="grid grid-cols-1 gap-x-5 sm:grid-cols-2">
                                 <div class="mb-3">
                                     <label for="seo_links" class="inline-block mb-2 text-base font-medium">SEO Linklər</label>

@@ -31,22 +31,52 @@
 
                             <div style="border: 1px solid black; padding: 30px" class="mt-5 mb-4 tab-content">
                                 @php
-                                $isFirst = true;
+                                    $isFirst = true;
+                                    $altFields = [
+                                        'header_logo_alt',
+                                        'footer_logo_alt',
+                                        'banner_image_alt',
+                                        'seminar_icon_alt',
+                                        'webinar_icon_alt',
+                                        'workshop_icon_alt',
+                                        'scholarship_icon_alt'
+                                    ];
                                 @endphp
+
                                 @foreach($languages as $language)
-                                <div class="tab-pane {{ $isFirst ? 'block' : 'hidden' }}" id="{{ $language->code }}">
-                                    <div class="flex flex-wrap gap-5">
-                                        <div class="mb-3 flex-1">
-                                            <label for="textArea" class="inline-block mb-2 text-base font-medium">Ünvan ({{ $language->code }})</label>
-                                            <textarea name="address[{{ $language->code }}]" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('address.' . $language->code, $model->getTranslation('address', $language->code)) }}</textarea>
+                                    <div class="tab-pane {{ $isFirst ? 'block' : 'hidden' }}" id="{{ $language->code }}">
+                                        <div class="grid grid-cols-1 gap-5">
+
+                                            {{-- Ünvan --}}
+                                            <div class="mb-3 w-full">
+                                                <label for="address_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">
+                                                    Ünvan ({{ $language->code }})
+                                                </label>
+                                                <textarea name="address[{{ $language->code }}]"
+                                                          class="w-full form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                                          id="address_{{ $language->code }}" rows="3">{{ old('address.' . $language->code, $model->getTranslation('address', $language->code)) }}</textarea>
+                                            </div>
+
+                                            {{-- Alt Mətnlər --}}
+                                            @foreach($altFields as $altField)
+                                                <div class="mb-3 w-full">
+                                                    <label for="{{ $altField }}_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">
+                                                        {{ ucwords(str_replace('_', ' ', $altField)) }} ({{ $language->code }})
+                                                    </label>
+                                                    <input type="text" name="{{ $altField }}[{{ $language->code }}]" id="{{ $altField }}_{{ $language->code }}"
+                                                           class="w-full form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                                           value="{{ old($altField . '.' . $language->code, $model->getTranslation($altField, $language->code)) }}">
+                                                </div>
+                                            @endforeach
+
                                         </div>
                                     </div>
-                                </div>
-                                @php
-                                $isFirst = false;
-                                @endphp
+                                    @php
+                                        $isFirst = false;
+                                    @endphp
                                 @endforeach
                             </div>
+
 
                             <div class="flex flex-wrap gap-5">
                                 <div class="mb-3 flex-1">
@@ -90,7 +120,7 @@
                                     <label for="phone3" class="inline-block mb-2 text-base font-medium">DMA, Technest, Qaçqınkom və digər dövlətlə əməkdaşlıq layihələri üçüntelefon nömrəsi:</label>
                                     <input type="text" id="phone3" name="phone3" value="{{ old('phone3', $model->phone3) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                 </div>
-                             
+
                             </div>
                             <div class="flex flex-wrap gap-5">
                                <div class="mb-3 flex-1">
@@ -103,7 +133,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-wrap gap-5">
-                                
+
                                 <div class="mb-3 flex-1">
                                     <label for="map" class="inline-block mb-2 text-base font-medium">Xəritə</label>
                                     <textarea style="height: 200px" name="map" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="map" rows="3">{{ old('map', $model->map) }}</textarea>
@@ -256,7 +286,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  
+
 
     function openPdf(url) {
         window.open(url, '_blank');

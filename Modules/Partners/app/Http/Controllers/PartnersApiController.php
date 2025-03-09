@@ -36,6 +36,7 @@ class PartnersApiController extends Controller
                     'image' => $item->image ? config('app.url') . '/' . $item->image['url'] : null,
                     'name' => $item->name,
                     'short_description' => $item->short_description,
+                    'image_alt_text' => $item->image_alt_text,
                 ];
             });
 

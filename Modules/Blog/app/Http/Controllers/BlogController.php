@@ -69,7 +69,7 @@ class BlogController extends Controller
         return $this->executeSafely(function () use ($request, $id) {
             $partner = $this->repository->find($id);
             $this->services->crudService->update($partner, $request, 'blog', true);
-            return redirect()->route('blog.index')->with('status', 'Bloq uğurla əlavə edildi');
+            return redirect()->route('blog.index')->with('status', 'Bloq uğurla əlavə yeniləndi');
         }, 'blog.index');
     }
 

@@ -73,7 +73,14 @@ class SiteInfoController extends Controller
 
         return $this->executeSafely(function () use ($request, $id) {
             $model = $this->repository->find($id);
-            $this->services->crudService->update($model, $request, 'siteinfo');
+            try {
+                $this->services->crudService->update($model, $request, 'siteinfo');
+            } catch (\Exception $e) {
+                dd("Xəta: " . $e->getMessage());
+            }
+
+
+
             return redirect()->route('siteinfo.edit', $model->id)->with('status', 'siteinfo uğurla yeniləndi');
         }, 'siteinfo.edit',false, ['id' => $id]);
     }
