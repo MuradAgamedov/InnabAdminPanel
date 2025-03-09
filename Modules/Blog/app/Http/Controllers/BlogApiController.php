@@ -22,10 +22,10 @@ class BlogApiController extends Controller
             $category_id = $request->id;
             $perPage = 8;
             $page = $request->get('page', 1); // Default to page 1 if 'page' query is not present
-    
+
             $items = $this->repository->getTrainingByCategoryWith('category_id', $category_id, ['image'])
                                       ->paginate($perPage, ['*'], 'page', $page);
-    
+
             $lang = $request->locale;
 
             if ($lang) {
@@ -60,7 +60,8 @@ class BlogApiController extends Controller
                     'seo_keywords' => $item->seo_keywords,
                     'seo_description' => $item->seo_description,
                     'seo_links' => $item->seo_links,
-                    'seo_scripts' => $item->seo_scripts
+                    'seo_scripts' => $item->seo_scripts,
+                    'image_alt_text' => $item->image_alt_text
                 ];
             });
 

@@ -21,7 +21,7 @@ public function get_blogcategory(Request $request): JsonResponse
     return $this->executeSafely(function () use ($request) {
         $items = $this->repository->all_activeWith(['blogs']);
         $lang = $request->locale;
-        
+
         if ($lang) {
             app()->setLocale($lang);
         }
@@ -62,7 +62,8 @@ public function get_blogcategory(Request $request): JsonResponse
                         'seo_keywords' => $blog->seo_keywords,
                         'seo_description' => $blog->seo_description,
                         'background_image' => $backgroundImage, // Gradient ve image eklenmiş
-                    ];
+                            'image_alt_text' => $image_alt_text, // Gradient ve image eklenmiş
+                        ];
                 }),
             ];
         });
