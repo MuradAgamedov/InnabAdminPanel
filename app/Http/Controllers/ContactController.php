@@ -10,6 +10,8 @@ use Google\Service\Drive;
 
 class ContactController extends Controller
 {
+
+    public $table_token = "1o_Ayu2dClfDJeXsc4zglN70QQHiLgEScvT2kothSahY";
     // Google Client konfigurasiya funksiyası
     private function getClient($scopes)
     {
@@ -65,7 +67,7 @@ class ContactController extends Controller
 
         try {
             $values = [[$request->name, $request->phone, $request->email, $request->formType]];
-            $this->appendToGoogleSheet('1qiecnUMFhrpcZsiicI9U5hD2ZppIaD2IVe4TAx7AV1w', 'innab-contact-form', $values);
+            $this->appendToGoogleSheet($this->table_token, 'innab-contact-form', $values);
 
             return response()->json(['success' => true, 'message' => 'Data successfully sent to Google Sheets']);
         } catch (\Exception $e) {
@@ -88,7 +90,7 @@ class ContactController extends Controller
 
         try {
             $values = [[$request->name, $request->phone, $request->email, $request->training]];
-            $this->appendToGoogleSheet('1qiecnUMFhrpcZsiicI9U5hD2ZppIaD2IVe4TAx7AV1w', 'innab-vebinar-form', $values);
+            $this->appendToGoogleSheet($this->table_token, 'innab-vebinar-form', $values);
 
             return response()->json(['success' => true, 'message' => 'Data successfully sent to Google Sheets']);
         } catch (\Exception $e) {
@@ -111,7 +113,7 @@ class ContactController extends Controller
 
         try {
             $values = [[$request->name, $request->phone, $request->email, $request->training]];
-            $this->appendToGoogleSheet('1qiecnUMFhrpcZsiicI9U5hD2ZppIaD2IVe4TAx7AV1w', 'innab-workshop-form', $values);
+            $this->appendToGoogleSheet($this->table_token, 'innab-workshop-form', $values);
 
             return response()->json(['success' => true, 'message' => 'Data successfully sent to Google Sheets']);
         } catch (\Exception $e) {
@@ -140,7 +142,7 @@ class ContactController extends Controller
                 [$request->name, $request->fin, $request->date, $request->phone, $request->project, $request->education, $request->studentStatus, $request->workStatus, $request->voen, $request->address, $cvLink]
             ];
 
-            $this->appendToGoogleSheet('1qiecnUMFhrpcZsiicI9U5hD2ZppIaD2IVe4TAx7AV1w', 'innab-carrier-and-schoolarship-form', $values);
+            $this->appendToGoogleSheet($this->table_token, 'innab-carrier-and-schoolarship-form', $values);
 
             return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla Google Sheets-ə və Drive-a göndərildi']);
         } catch (\Exception $e) {
