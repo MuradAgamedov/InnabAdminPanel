@@ -11,7 +11,14 @@ use Google\Service\Drive;
 class ContactController extends Controller
 {
 
-    public $table_token = "1o_Ayu2dClfDJeXsc4zglN70QQHiLgEScvT2kothSahY";
+    public $table_token;
+    public $cvUploadFolderId;
+
+    public function __construct()
+    {
+        $this->table_token = env('table_token');
+        $this->cvUploadFolderId = env('CV_UPLOAD_FOLDER_ID');
+    }
     // Google Client konfigurasiya funksiyası
     private function getClient($scopes)
     {
@@ -137,7 +144,7 @@ class ContactController extends Controller
         }
 
         try {
-            $cvLink = $this->uploadToGoogleDrive($request->file('cv'), '1P385UpMv58dNSGbYmzXh4CbuuItBeJdd');
+            $cvLink = $this->uploadToGoogleDrive($request->file('cv'), $this->cvUploadFolderId);
             $values = [
                 [$request->name, $request->fin, $request->date, $request->phone, $request->project, $request->education, $request->studentStatus, $request->workStatus, $request->voen, $request->address, $cvLink]
             ];
