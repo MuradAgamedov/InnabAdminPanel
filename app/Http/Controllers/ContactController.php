@@ -145,9 +145,20 @@ class ContactController extends Controller
 
         try {
             $cvLink = $this->uploadToGoogleDrive($request->file('cv'), $this->cvUploadFolderId);
-            $values = [
-                [$request->name, $request->fin, $request->date, $request->phone, $request->project, $request->education, $request->studentStatus, $request->workStatus, $request->voen, $request->address, $cvLink]
-            ];
+            $values = [[
+                strval($request->name),
+                strval($request->fin),
+                strval($request->date),
+                strval($request->phone),
+                strval($request->project),
+                strval($request->education),
+                strval($request->studentStatus),
+                strval($request->workStatus),
+                strval($request->voen),
+                strval($request->address),
+                strval($cvLink),
+            ]];
+
 
             $this->appendToGoogleSheet($this->table_token, 'innab-carrier-and-schoolarship-form', $values);
 
