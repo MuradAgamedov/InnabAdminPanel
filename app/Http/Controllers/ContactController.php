@@ -96,7 +96,7 @@ class ContactController extends Controller
         }
 
         try {
-            $values = [[$request->name, $request->phone, $request->email, $request->training]];
+            $values = [[$request->name, $request->phone, $request->email, $request->service]];
             $this->appendToGoogleSheet($this->table_token, 'innab-vebinar-form', $values);
 
             return response()->json(['success' => true, 'message' => 'Data successfully sent to Google Sheets']);
