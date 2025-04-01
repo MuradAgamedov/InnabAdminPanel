@@ -30,20 +30,7 @@ class MenuApiController extends Controller
                 return response()->json(['success' => false, 'message' => 'No data found'], 404);
             }
 
-            $arr = $items->map(function ($item) {
-                return [
-                    'title' => $item->title,
-                    'slug' => $item->slug,
-                    'seo_title' => $item->seo_title,
-                    'seo_keywords' => $item->seo_keywords,
-                    'seo_description' => $item->seo_description,
-                    'seo_links' => $item->seo_links,
-                    'seo_scripts' => $item->seo_scripts,
-                    'parent_id' => $item->parent_id,
-                ];
-            });
-
-            return response()->json(['success' => true, 'data' => $arr]);
+            return response()->json(['success' => true, 'data' => $items]);
         }, null, true);
     }
 }
