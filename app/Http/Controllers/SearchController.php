@@ -34,7 +34,7 @@ class SearchController extends Controller
             'data' => $trainings->items(),
             'current_page' => $trainings->currentPage(),
             'total' => $trainings->total(),
-            'per_page' => $trainings->p`erPage(),`
+            'per_page' => $trainings->perPage(),
             'last_page' => $trainings->lastPage(),
             'next_page_url' => $trainings->nextPageUrl(),
             'prev_page_url' => $trainings->previousPageUrl(),
