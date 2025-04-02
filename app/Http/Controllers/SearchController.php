@@ -23,30 +23,39 @@ class SearchController extends Controller
         return response()->json($response);
     }
 
-    public function search_page(Request $request)
+    public function search_trainings($params, $perPage = 6)
     {
+        $query = strtolower($params);
 
-        $query = strtolower($request->q); // axtarışı kiçik hərfə çevir
+        $trainings = \Modules\Training\Models\Training::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])
+            ->paginate($perPage);
 
-        $trainings = \Modules\Training\Models\Training::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
-        $blogs = \Modules\Blog\Models\Blog::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
-        $news = \Modules\News\Models\News::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
-        $workshops = \Modules\Workshop\Models\Workshop::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
-        $webinars = \Modules\Vebinar\Models\Vebinar::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
-        $videos = VideoLessons::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
-        $scholarships = \Modules\ScholarshipProgram\Models\ScholarshipProgram::whereRaw('LOWER(name) LIKE ?', ["%{$query}%"])->get();
-        $partners = Partners::whereRaw('LOWER(name) LIKE ?', ["%{$query}%"])->get();
-        $projects = \Modules\Project\Models\Project::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])->get();
         return response()->json([
-            'trainings' => $trainings,
-            'blogs' => $blogs,
-            'news' => $news,
-            'workshops' => $workshops,
-            'webinars' => $webinars,
-            'videos' => $videos,
-            'scholarships' => $scholarships,
-            'partners' => $partners,
-            'projects' => $projects,
+            'data' => $trainings->items(),
+            'current_page' => $trainings->currentPage(),
+            'total' => $trainings->total(),
+            'per_page' => $trainings->p`erPage(),`
+            'last_page' => $trainings->lastPage(),
+            'next_page_url' => $trainings->nextPageUrl(),
+            'prev_page_url' => $trainings->previousPageUrl(),
+        ]);
+    }
+
+
+    public function search_blogs($params, $perPage = 6) {
+        $query = strtolower($params);
+
+        $trainings = Blog::whereRaw('LOWER(title) LIKE ?', ["%{$query}%"])
+            ->paginate($perPage);
+
+        return response()->json([
+            'data' => $trainings->items(),
+            'current_page' => $trainings->currentPage(),
+            'total' => $trainings->total(),
+            'per_page' => $trainings->perPage(),
+            'last_page' => $trainings->lastPage(),
+            'next_page_url' => $trainings->nextPageUrl(),
+            'prev_page_url' => $trainings->previousPageUrl(),
         ]);
     }
 }

@@ -24,4 +24,5 @@ Route::post('/vebinar/post', [ContactController::class, 'vebinar'])->name('conta
 Route::post('/workshop/post', [ContactController::class, 'workshop'])->name('contact.workshop');
 Route::post('/carrier_and_schoolarship/post', [ContactController::class, 'carrier_and_schoolarship'])->name('contact.carrier_and_schoolarship');
 Route::get('/google_datas/get', [GoogleDatasController::class, 'google_datas'])->name('google_datas.get');
-Route::get('/search_page/{param}', [SearchController::class, 'search_page'])->name('search_page');
+Route::get('/search_trainings/{param}', [SearchController::class, 'search_trainings'])->name('search_trainings');
+Route::get('/search_blogs/{param}', [SearchController::class, 'search_blogs'])->name('search_blogs');
