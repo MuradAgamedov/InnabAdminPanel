@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\LogoutController;
 use App\Http\Controllers\ContactFormController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebinarFormController;
-
+use App\Http\Controllers\WorkshopFormController;
 Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('admin.login');
@@ -17,6 +17,11 @@ Route::get('/contact-forms/{id}/delete', [ContactFormController::class, 'destroy
 
 Route::get('/webinar-forms', [WebinarFormController::class, 'index'])->name('webinar-forms.index');
 Route::get('/webinar-forms/{id}/delete', [WebinarFormController::class, 'destroy'])->name('webinar-forms.destroy');
+
+
+
+Route::get('/workshop-forms', [WorkshopFormController::class, 'index'])->name('workshop-forms.index');
+Route::get('/workshop-forms/{id}/delete', [WorkshopFormController::class, 'destroy'])->name('workshop-forms.destroy');
 
 
 Route::get('/simple-route', function () {
