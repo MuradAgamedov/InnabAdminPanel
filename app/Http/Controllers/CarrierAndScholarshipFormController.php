@@ -18,12 +18,10 @@ class CarrierAndScholarshipFormController extends Controller
     {
         $form = CarrierAndScholarshipForm::findOrFail($id);
 
-        // CV faylını sil (əgər mövcuddursa)
         if ($form->cv_path && Storage::disk('public')->exists($form->cv_path)) {
             Storage::disk('public')->delete($form->cv_path);
         }
 
-        // Formu sil
         $form->delete();
 
         return redirect()->route('carrier-forms.index')->with('success', 'Form və CV faylı silindi.');
