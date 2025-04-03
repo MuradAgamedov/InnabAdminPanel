@@ -44,6 +44,10 @@ class Blog extends Model
         return $this->hasMany(BlogContent::class, 'blog_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(\Modules\BlogCategory\Models\BlogCategory::class, 'category_id');
+    }
 
     protected static function newFactory(): BlogFactory
     {
