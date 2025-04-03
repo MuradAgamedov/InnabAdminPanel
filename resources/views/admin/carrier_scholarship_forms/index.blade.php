@@ -60,6 +60,7 @@
                 <p><strong>FIN:</strong> <span id="modalFin" class="font-medium"></span></p>
                 <p><strong>Telefon:</strong> <span id="modalPhone" class="font-medium"></span></p>
                 <p><strong>Tarix:</strong> <span id="modalDate" class="font-medium"></span></p>
+                <p><strong>Göndərilmə Tarixi:</strong> <span id="modalCreatedAt" class="font-medium"></span></p>
                 <p><strong>Layihə:</strong> <span id="modalProject" class="font-medium"></span></p>
                 <p><strong>Təhsil:</strong> <span id="modalEducation" class="font-medium"></span></p>
                 <p><strong>Tələbə Statusu:</strong> <span id="modalStudentStatus" class="font-medium"></span></p>
@@ -74,6 +75,7 @@
             </div>
         </div>
     </div>
+
 
 </div>
 @endsection
