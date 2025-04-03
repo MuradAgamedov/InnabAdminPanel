@@ -81,10 +81,6 @@ class ContactAdminPanelController extends Controller
 
 
 
-    use Illuminate\Support\Facades\Validator;
-    use Illuminate\Support\Facades\Storage;
-    use App\Models\CarrierAndScholarshipForm;
-
     public function carrier_and_schoolarship(Request $request)
     {
         $validator = Validator::make($request->all(), [
