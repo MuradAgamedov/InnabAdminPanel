@@ -139,7 +139,7 @@ class ContactAdminPanelController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Müraciət uğurla göndərildi.',
+                'message' => $request->all(),
                 'cv_link' => asset('storage/' . $cvPath) // Baxmaq üçün link
             ]);
         } catch (\Exception $e) {
