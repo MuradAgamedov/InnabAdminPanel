@@ -106,10 +106,19 @@ class ContactAdminPanelController extends Controller
         }
 
         try {
-            // CV faylını yadda saxla
-            $cvPath = $request->file('cv')->store('cvs', 'public'); // public diskdə saxlayırıq ki, storage link işləsin
+            // Fayl yoxlaması
+            if (!$request->hasFile('cv')) {
+                return response()->json(['error' => 'CV faylı göndərilməyib.'], 400);
+            }
 
-            // Məlumatları bazaya yaz
+            if (!$request->file('cv')->isValid()) {
+                return response()->json(['error' => 'CV faylı etibarsızdır.'], 400);
+            }
+
+            // Faylı public diskə yadda saxla (storage/app/public/cvs)
+            $cvPath = $request->file('cv')->store('cvs', 'public'); // storage/app/public/cvs
+
+            // Bazaya yaz
             CarrierAndScholarshipForm::create([
                 'name' => $request->name,
                 'date' => $request->date,
@@ -125,17 +134,17 @@ class ContactAdminPanelController extends Controller
                 'work_status_other' => $request->work_status_other,
                 'voen' => $request->voen,
                 'address' => $request->address,
-                'cv_path' => $cvPath,
+                'cv_path' => $cvPath, // sadəcə `cvs/filename.pdf`
             ]);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Müraciət uğurla göndərildi.',
-                'cv_link' => asset('storage/' . $cvPath)
+                'cv_link' => asset('storage/' . $cvPath) // Baxmaq üçün link
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Məlumatların göndərilməsi alınmadı',
+                'error' => 'Məlumatların göndərilməsi zamanı xəta baş verdi.',
                 'details' => $e->getMessage()
             ], 500);
         }
