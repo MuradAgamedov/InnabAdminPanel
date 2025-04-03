@@ -97,7 +97,9 @@
 
         document.getElementById('modalVoen').textContent = button.getAttribute('data-voen') || '-';
         document.getElementById('modalAddress').textContent = button.getAttribute('data-address') || '-';
-        document.getElementById('modalCv').href = button.getAttribute('data-cv-path') || '#';
+        const cvFile = button.getAttribute('data-cv-path');
+        document.getElementById('modalCv').href = cvFile ? `/storage/${cvFile}` : '#';
+
 
         document.getElementById('formModal').classList.remove('hidden');
     }
