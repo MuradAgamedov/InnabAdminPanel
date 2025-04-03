@@ -120,7 +120,7 @@ class ContactAdminPanelController extends Controller
                 'cv_path' => $cvPath, // Fayl yolu
             ]);
 
-            return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla yadda saxlanıldı']);
+            return response()->json(['success' => true, 'message' => $request->all()]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Məlumatların göndərilməsi alınmadı', 'details' => $e->getMessage()], 500);
         }
