@@ -36,7 +36,7 @@
                                         onclick="openModal(this)"
                                         class="text-blue-500 hover:text-blue-700 mr-4"
                                         data-name="{{ $form->name }}"
-                                        data-form_type="{{ $form->form_type }}"
+                                        data-form_type="{{ $form->formType }}"
                                         data-phone="{{ $form->phone }}"
                                         data-address="{{ $form->address }}">
                                         Oxu
