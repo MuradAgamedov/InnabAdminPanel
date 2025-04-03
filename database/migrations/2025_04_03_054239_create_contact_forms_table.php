@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('phone');
             $table->string('email')->nullable();
-            $table->string('form_type')->nullable();
+            $table->string('formType')->nullable();
             $table->string('service')->nullable();
             $table->timestamps();
         });
