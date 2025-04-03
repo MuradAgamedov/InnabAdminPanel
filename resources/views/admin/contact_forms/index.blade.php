@@ -94,10 +94,13 @@
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            timeZone: 'Asia/Baku',
-            timeZoneName: 'short'
+            timeZone: 'Asia/Baku' // Azərbaycan vaxtında göstər
+            // timeZoneName çıxarıldı
         };
         document.getElementById('modalCreatedAt').textContent = createdAt.toLocaleString('az-AZ', options);
+
+        document.getElementById('modalCreatedAt').textContent = createdAt.toLocaleString('az-AZ', options);
+
 
         // Modalı göstəririk
         document.getElementById('formModal').classList.remove('hidden');
