@@ -41,6 +41,7 @@ Route::get('/workshop-forms/export/csv', [WorkshopFormController::class, 'export
 Route::get('/carrier-scholarship-forms', [CarrierAndScholarshipFormController::class, 'index'])->name('carrier-forms.index');
 Route::get('/carrier-scholarship-forms/{id}/delete', [CarrierAndScholarshipFormController::class, 'destroy'])->name('carrier-forms.destroy');
 
+Route::get('/carrier-forms/export/csv', [CarrierAndScholarshipFormController::class, 'exportCsv'])->name('carrier-forms.export.csv');
 
 
 
