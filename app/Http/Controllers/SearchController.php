@@ -63,6 +63,11 @@ class SearchController extends Controller
                 'category_id' => $item->category_id,
                 'created_at' => $item->created_at,
                 'updated_at' => $item->updated_at,
+                'category' => $item->category ? [
+                    'id' => $item->category->id,
+                    'title' => $item->category->getTranslation('title', $lang),
+                ] : null,
+
             ];
         });
 
@@ -111,6 +116,11 @@ class SearchController extends Controller
                 'category_id' => $item->category_id,
                 'created_at' => $item->created_at,
                 'updated_at' => $item->updated_at,
+                'category' => $item->category ? [
+                    'id' => $item->category->id,
+                    'title' => $item->category->getTranslation('title', $lang),
+                ] : null,
+
             ];
         });
 
