@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exports\ContactFormsExport;
 use App\Models\ContactForm;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 
 use OpenSpout\Writer\Common\Creator\WriterEntityFactory;
@@ -67,36 +67,7 @@ class ContactFormController extends Controller
 
     public function exportXlsx()
     {
-        $forms = ContactForm::all();
-
-        $filename = storage_path('app/public/forms_' . now()->format('Y_m_d_H_i_s') . '.xlsx');
-
-        $writer = WriterEntityFactory::createXLSXWriter();
-        $writer->openToFile($filename);
-
-        $header = WriterEntityFactory::createRowFromArray([
-            'Ad Soyad',
-            'Telefon',
-            'Xidmət',
-            'Form Tipi',
-            'Göndərilmə Tarixi'
-        ]);
-
-        $writer->addRow($header);
-
-        foreach ($forms as $form) {
-            $row = WriterEntityFactory::createRowFromArray([
-                $form->name,
-                $form->phone,
-                $form->service,
-                $form->formType ?? '-',
-                $form->created_at->timezone('Asia/Baku')->format('d.m.Y H:i:s'),
-            ]);
-            $writer->addRow($row);
-        }
-
-        $writer->close();
-
-        return response()->download($filename)->deleteFileAfterSend();
+        $fileName = "forms_" . now()->format('Y_m_d_H_i_s') . ".xlsx";
+        return Excel::download(new ContactFormsExport, $fileName);
     }
 }
