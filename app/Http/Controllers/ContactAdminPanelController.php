@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarrierAndScholarshipForm;
 use App\Models\ContactForm;
 use App\Models\WebinarForm;
 use App\Models\WorkshopForm;
@@ -71,6 +72,53 @@ class ContactAdminPanelController extends Controller
 
         try {
             WorkshopForm::create($request->only(['name', 'phone', 'email', 'service']));
+
+            return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla yadda saxlanıldı']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Məlumatların göndərilməsi alınmadı', 'details' => $e->getMessage()], 500);
+        }
+    }
+
+
+
+    public function carrier_and_schoolarship(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'date' => 'required|date',
+            'phone' => 'required|string',
+            'fin' => 'required|string',
+            'cv' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
+            'project' => 'nullable|string',
+            'education' => 'nullable|string',
+            'student_status' => 'nullable|string',
+            'work_status' => 'nullable|string',
+            'voen' => 'nullable|string',
+            'address' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        try {
+            // CV faylını yadda saxla
+            $cvPath = $request->file('cv')->store('cvs');
+
+            // Məlumatları bazaya yaz
+            CarrierAndScholarshipForm::create([
+                'name' => $request->name,
+                'date' => $request->date,
+                'phone' => $request->phone,
+                'fin' => $request->fin,
+                'project' => $request->project,
+                'education' => $request->education,
+                'student_status' => $request->student_status,
+                'work_status' => $request->work_status,
+                'voen' => $request->voen,
+                'address' => $request->address,
+                'cv_path' => $cvPath, // Fayl yolu
+            ]);
 
             return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla yadda saxlanıldı']);
         } catch (\Exception $e) {
