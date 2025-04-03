@@ -57,7 +57,7 @@ class SearchController extends Controller
                 'seo_links' => $item->seo_links,
                 'seo_scripts' => $item->seo_scripts,
                 'image_url' => $item->image ? $this->domain . '/' . $item->image->url : null,
-                'image_alt' => $item->getTranslation('image_alt', $lang),
+                'image_alt_text' => $item->getTranslation('image_alt', $lang),
                 'order' => $item->order,
                 'status' => $item->status,
                 'category_id' => $item->category_id,
