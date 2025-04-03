@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('education_other')->nullable();
             $table->string('project_other')->nullable();
             $table->string('cv_path'); // CV faylının yolu
+            $table->timestamps();
         });
     }
 
