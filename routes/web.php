@@ -34,6 +34,7 @@ Route::get('/webinar-forms/export/csv', [WebinarFormController::class, 'exportCs
 
 Route::get('/workshop-forms', [WorkshopFormController::class, 'index'])->name('workshop-forms.index');
 Route::get('/workshop-forms/{id}/delete', [WorkshopFormController::class, 'destroy'])->name('workshop-forms.destroy');
+Route::get('/workshop-forms/export/csv', [WorkshopFormController::class, 'exportCsv'])->name('workshop-forms.export.csv');
 
 
 
