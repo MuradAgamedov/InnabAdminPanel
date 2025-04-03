@@ -26,7 +26,7 @@ class SearchController extends Controller
     public function search_trainings($lang, $params, $perPage = 6)
     {
         app()->setLocale($lang);
-        dd(env('APP_URL'));
+        dd(env('table_token'));
         $query = strtolower($params);
 
         $trainings = \Modules\Training\Models\Training::where(function ($q) use ($query) {
