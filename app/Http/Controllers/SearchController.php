@@ -32,32 +32,32 @@ class SearchController extends Controller
 
     public function search_trainings($lang, $params, $perPage = 6)
     {
-
+        app()->setLocale($lang);
         $query = strtolower($params);
 
-        $trainings = \Modules\Training\Models\Training::where(function ($q) use ($query) {
-            $q->whereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.az"))) LIKE ?', ["%{$query}%"])
-                ->orWhereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.en"))) LIKE ?', ["%{$query}%"]);
-        })->paginate($perPage);
+        $trainings = \Modules\Training\Models\Training::whereRaw(
+            'LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.' . $lang . '"))) LIKE ?',
+            ["%{$query}%"]
+        )->paginate($perPage);
 
         $data = $trainings->map(function ($item) use ($lang) {
             return [
                 'id' => $item->id,
-                'title' => $item->getTranslation('title', $lang) ?? $item->getTranslation('title', 'en'),
-                'slug' => $item->getTranslation('slug', $lang) ?? $item->getTranslation('slug', 'en'),
-                'short_description' => $item->getTranslation('short_description', $lang) ?? $item->getTranslation('short_description', 'en'),
-                'top_text_title' => $item->getTranslation('top_text_title', $lang) ?? $item->getTranslation('top_text_title', 'en'),
-                'top_text' => $item->getTranslation('top_text', $lang) ?? $item->getTranslation('top_text', 'en'),
-                'bottom_text_title' => $item->getTranslation('bottom_text_title', $lang) ?? $item->getTranslation('bottom_text_title', 'en'),
-                'bottom_text' => $item->getTranslation('bottom_text', $lang) ?? $item->getTranslation('bottom_text', 'en'),
-                'list' => $item->getTranslation('list', $lang) ?? $item->getTranslation('list', 'en'),
-                'seo_title' => $item->getTranslation('seo_title', $lang) ?? $item->getTranslation('seo_title', 'en'),
-                'seo_keywords' => $item->getTranslation('seo_keywords', $lang) ?? $item->getTranslation('seo_keywords', 'en'),
-                'seo_description' => $item->getTranslation('seo_description', $lang) ?? $item->getTranslation('seo_description', 'en'),
+                'title' => $item->getTranslation('title', $lang),
+                'slug' => $item->getTranslation('slug', $lang),
+                'short_description' => $item->getTranslation('short_description', $lang),
+                'top_text_title' => $item->getTranslation('top_text_title', $lang),
+                'top_text' => $item->getTranslation('top_text', $lang),
+                'bottom_text_title' => $item->getTranslation('bottom_text_title', $lang),
+                'bottom_text' => $item->getTranslation('bottom_text', $lang),
+                'list' => $item->getTranslation('list', $lang),
+                'seo_title' => $item->getTranslation('seo_title', $lang),
+                'seo_keywords' => $item->getTranslation('seo_keywords', $lang),
+                'seo_description' => $item->getTranslation('seo_description', $lang),
                 'seo_links' => $item->seo_links,
                 'seo_scripts' => $item->seo_scripts,
-                'image_url' => $this->domain . '/' . $item->image->url,
-                'image_alt' => $item->getTranslation('image_alt', $lang) ?? $item->getTranslation('image_alt', 'en'),
+                'image_url' => $item->image ? $this->domain . '/' . $item->image->url : null,
+                'image_alt' => $item->getTranslation('image_alt', $lang),
                 'order' => $item->order,
                 'status' => $item->status,
                 'category_id' => $item->category_id,
@@ -82,29 +82,30 @@ class SearchController extends Controller
 
 
 
+
     public function search_blogs($lang, $params, $perPage = 6)
     {
         app()->setLocale($lang);
         $query = strtolower($params);
 
-        $blogs = \Modules\Blog\Models\Blog::where(function ($q) use ($query) {
-            $q->whereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.az"))) LIKE ?', ["%{$query}%"])
-                ->orWhereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.en"))) LIKE ?', ["%{$query}%"]);
-        })->paginate($perPage);
+        $blogs = \Modules\Blog\Models\Blog::whereRaw(
+            'LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.' . $lang . '"))) LIKE ?',
+            ["%{$query}%"]
+        )->paginate($perPage);
 
         $data = $blogs->map(function ($item) use ($lang) {
             return [
                 'id' => $item->id,
-                'title' => $item->getTranslation('title', $lang) ?? $item->getTranslation('title', 'en'),
-                'slug' => $item->getTranslation('slug', $lang) ?? $item->getTranslation('slug', 'en'),
-                'short_description' => $item->getTranslation('short_description', $lang) ?? $item->getTranslation('short_description', 'en'),
-                'seo_title' => $item->getTranslation('seo_title', $lang) ?? $item->getTranslation('seo_title', 'en'),
-                'seo_keywords' => $item->getTranslation('seo_keywords', $lang) ?? $item->getTranslation('seo_keywords', 'en'),
-                'seo_description' => $item->getTranslation('seo_description', $lang) ?? $item->getTranslation('seo_description', 'en'),
+                'title' => $item->getTranslation('title', $lang),
+                'slug' => $item->getTranslation('slug', $lang),
+                'short_description' => $item->getTranslation('short_description', $lang),
+                'seo_title' => $item->getTranslation('seo_title', $lang),
+                'seo_keywords' => $item->getTranslation('seo_keywords', $lang),
+                'seo_description' => $item->getTranslation('seo_description', $lang),
                 'seo_links' => $item->seo_links,
                 'seo_scripts' => $item->seo_scripts,
-                'image_url' => $this->domain . '/' . $item->image->url,
-                'image_alt_text' => $item->getTranslation('image_alt_text', $lang) ?? $item->getTranslation('image_alt_text', 'en'),
+                'image_url' => $item->image ? $this->domain . '/' . $item->image->url : null,
+                'image_alt_text' => $item->getTranslation('image_alt_text', $lang),
                 'order' => $item->order,
                 'status' => $item->status,
                 'category_id' => $item->category_id,
