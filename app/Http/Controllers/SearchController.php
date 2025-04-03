@@ -66,7 +66,7 @@ class SearchController extends Controller
                 'updated_at' => $item->updated_at,
                 'category' => $item->category ? [
                     'id' => $item->category->id,
-                    'title' => $item->category->getTranslation('title', $lang),
+                    'slug' => $item->category->getTranslation('slug', $lang),
                 ] : null,
 
             ];
@@ -119,7 +119,7 @@ class SearchController extends Controller
                 'updated_at' => $item->updated_at,
                 'category' => $item->category ? [
                     'id' => $item->category->id,
-                    'title' => $item->category->getTranslation('title', $lang),
+                    'slug' => $item->category->getTranslation('slug', $lang),
                 ] : null,
 
             ];
