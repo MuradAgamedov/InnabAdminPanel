@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CarrierAndScholarshipForm;
+use Illuminate\Support\Facades\Storage;
 
 class CarrierAndScholarshipFormController extends Controller
 {
@@ -13,10 +14,18 @@ class CarrierAndScholarshipFormController extends Controller
         return view('admin.carrier_scholarship_forms.index', compact('forms'));
     }
 
-
     public function destroy($id)
     {
-        CarrierAndScholarshipForm::findOrFail($id)->delete();
-        return redirect()->route('carrier-forms.index')->with('success', 'Form silindi.');
+        $form = CarrierAndScholarshipForm::findOrFail($id);
+
+        // CV faylını sil (əgər mövcuddursa)
+        if ($form->cv_path && Storage::disk('public')->exists($form->cv_path)) {
+            Storage::disk('public')->delete($form->cv_path);
+        }
+
+        // Formu sil
+        $form->delete();
+
+        return redirect()->route('carrier-forms.index')->with('success', 'Form və CV faylı silindi.');
     }
 }
