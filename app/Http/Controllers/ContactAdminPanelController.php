@@ -81,6 +81,10 @@ class ContactAdminPanelController extends Controller
 
 
 
+    use Illuminate\Support\Facades\Validator;
+    use Illuminate\Support\Facades\Storage;
+    use App\Models\CarrierAndScholarshipForm;
+
     public function carrier_and_schoolarship(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -90,9 +94,13 @@ class ContactAdminPanelController extends Controller
             'fin' => 'required|string',
             'cv' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
             'project' => 'nullable|string',
+            'project_other' => 'nullable|string',
             'education' => 'nullable|string',
+            'education_other' => 'nullable|string',
             'student_status' => 'nullable|string',
+            'student_status_other' => 'nullable|string',
             'work_status' => 'nullable|string',
+            'work_status_other' => 'nullable|string',
             'voen' => 'nullable|string',
             'address' => 'nullable|string',
         ]);
@@ -103,7 +111,7 @@ class ContactAdminPanelController extends Controller
 
         try {
             // CV faylını yadda saxla
-            $cvPath = $request->file('cv')->store('cvs');
+            $cvPath = $request->file('cv')->store('cvs', 'public'); // public diskdə saxlayırıq ki, storage link işləsin
 
             // Məlumatları bazaya yaz
             CarrierAndScholarshipForm::create([
@@ -112,17 +120,28 @@ class ContactAdminPanelController extends Controller
                 'phone' => $request->phone,
                 'fin' => $request->fin,
                 'project' => $request->project,
+                'project_other' => $request->project_other,
                 'education' => $request->education,
+                'education_other' => $request->education_other,
                 'student_status' => $request->student_status,
+                'student_status_other' => $request->student_status_other,
                 'work_status' => $request->work_status,
+                'work_status_other' => $request->work_status_other,
                 'voen' => $request->voen,
                 'address' => $request->address,
-                'cv_path' => $cvPath, // Fayl yolu
+                'cv_path' => $cvPath,
             ]);
 
-            return response()->json(['success' => true, 'message' => $request->all()]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Müraciət uğurla göndərildi.',
+                'cv_link' => asset('storage/' . $cvPath)
+            ]);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Məlumatların göndərilməsi alınmadı', 'details' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Məlumatların göndərilməsi alınmadı',
+                'details' => $e->getMessage()
+            ], 500);
         }
     }
 }
