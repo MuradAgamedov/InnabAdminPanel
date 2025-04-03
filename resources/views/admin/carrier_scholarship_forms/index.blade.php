@@ -77,8 +77,9 @@
 <script>
     function openModal(button) {
         const getValue = (main, other) => {
-            const otherVal = button.getAttribute('data-' + other);
-            return otherVal && otherVal.trim() !== '' ? otherVal : (button.getAttribute('data-' + main) || '-');
+            const otherVal = button.getAttribute('data-' + other.replace(/_/g, '-'));
+            const mainVal = button.getAttribute('data-' + main.replace(/_/g, '-'));
+            return otherVal && otherVal.trim() !== '' ? otherVal : (mainVal || '-');
         };
 
         document.getElementById('modalName').textContent = button.getAttribute('data-name') || '-';
@@ -86,10 +87,10 @@
         document.getElementById('modalFin').textContent = button.getAttribute('data-fin') || '-';
         document.getElementById('modalDate').textContent = button.getAttribute('data-date') || '-';
 
-        document.getElementById('modalProject').textContent = getValue('project', 'project-other');
-        document.getElementById('modalEducation').textContent = getValue('education', 'education-other');
-        document.getElementById('modalStudentStatus').textContent = getValue('student-status', 'student-status-other');
-        document.getElementById('modalWorkStatus').textContent = getValue('work-status', 'work-status-other');
+        document.getElementById('modalProject').textContent = getValue('project', 'project_other');
+        document.getElementById('modalEducation').textContent = getValue('education', 'education_other');
+        document.getElementById('modalStudentStatus').textContent = getValue('student_status', 'student_status_other');
+        document.getElementById('modalWorkStatus').textContent = getValue('work_status', 'work_status_other');
 
         document.getElementById('modalVoen').textContent = button.getAttribute('data-voen') || '-';
         document.getElementById('modalAddress').textContent = button.getAttribute('data-address') || '-';
