@@ -37,6 +37,7 @@
                                         data-name="{{ $form->name }}"
                                         data-form_type="{{ $form->formType }}"
                                         data-phone="{{ $form->phone }}"
+                                        data-service="{{ $form->service }}"
                                         data-created_at="{{ $form->created_at }}">
                                         Oxu
                                     </button>
@@ -63,7 +64,9 @@
             <p><strong>Ad Soyad:</strong> <span id="modalName" class="text-lg"></span></p>
             <p><strong>Form Tipi:</strong> <span id="modalFormType" class="text-lg"></span></p>
             <p><strong>Telefon:</strong> <span id="modalPhone" class="text-lg"></span></p>
+            <p><strong>Xidmət:</strong> <span id="modalService" class="text-lg"></span></p>
             <p><strong>Müraciət Tarixi:</strong> <span id="modalCreatedAt" class="text-lg"></span></p>
+
             <div class="mt-4 text-right">
                 <button onclick="closeModal()" class="px-4 py-2 bg-red-500 text-white rounded">Bağla</button>
             </div>
@@ -76,12 +79,12 @@
 @push('scripts')
 <script>
     function openModal(button) {
-        // Düymənin data atributlarından məlumatları alırıq
+        // Modal məlumatlarını doldururuq
         document.getElementById('modalName').textContent = button.getAttribute('data-name');
         document.getElementById('modalFormType').textContent = button.getAttribute('data-form_type');
         document.getElementById('modalPhone').textContent = button.getAttribute('data-phone');
+        document.getElementById('modalService').textContent = button.getAttribute('data-service');
 
-        // Müraciət tarixini Azərbaycan vaxtı ilə göstəririk
         let createdAt = new Date(button.getAttribute('data-created_at'));
         let options = {
             weekday: 'long',
@@ -91,12 +94,12 @@
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            timeZone: 'Asia/Baku', // Azərbaycan vaxtı
+            timeZone: 'Asia/Baku',
             timeZoneName: 'short'
         };
         document.getElementById('modalCreatedAt').textContent = createdAt.toLocaleString('az-AZ', options);
 
-        // Modalı açırıq
+        // Modalı göstəririk
         document.getElementById('formModal').classList.remove('hidden');
     }
 
