@@ -13,7 +13,7 @@ class ContactForm extends Model
         'name',
         'phone',
         'email',
-        'form_type',
+        'formType',
         'service'
     ];
 }
