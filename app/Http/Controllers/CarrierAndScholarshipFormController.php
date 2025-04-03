@@ -9,9 +9,10 @@ class CarrierAndScholarshipFormController extends Controller
 {
     public function index()
     {
-        $forms = CarrierAndScholarshipForm::all();
+        $forms = CarrierAndScholarshipForm::orderBy('date', 'desc')->get();
         return view('admin.carrier_scholarship_forms.index', compact('forms'));
     }
+
 
     public function destroy($id)
     {
