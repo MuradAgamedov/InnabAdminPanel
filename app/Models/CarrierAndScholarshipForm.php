@@ -9,6 +9,8 @@ class CarrierAndScholarshipForm extends Model
 {
     use HasFactory;
 
+    protected $table = 'carrier_and_scholarship_forms'; // Əgər cədvəl adını dəyişmisənsə, əlavə et
+
     protected $fillable = [
         'name',
         'date',
@@ -21,5 +23,9 @@ class CarrierAndScholarshipForm extends Model
         'voen',
         'address',
         'cv_path',
+        'work_status_other',
+        'student_status_other',
+        'education_other',
+        'project_other',
     ];
 }
