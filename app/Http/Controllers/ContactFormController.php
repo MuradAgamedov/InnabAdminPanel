@@ -29,7 +29,7 @@ class ContactFormController extends Controller
 
         $filename = "forms_" . now()->format('Y_m_d_H_i_s') . ".csv";
         $headers = [
-            "Content-type" => "text/csv",
+            "Content-type" => "text/csv; charset=UTF-8",
             "Content-Disposition" => "attachment; filename=$filename",
             "Pragma" => "no-cache",
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
@@ -39,10 +39,13 @@ class ContactFormController extends Controller
         $callback = function () use ($forms) {
             $file = fopen('php://output', 'w');
 
-            // Header
-            fputcsv($file, ['Ad Soyad', 'Telefon', 'Xidmət', 'Form Tipi', 'Göndərilmə Tarixi']);
+            // UTF-8 BOM - Excel üçün
+            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
-            // Data
+            // Header (sətrlərin ayrılması üçün `;` istifadə edilir)
+            fputcsv($file, ['Ad Soyad', 'Telefon', 'Xidmət', 'Form Tipi', 'Göndərilmə Tarixi'], ';');
+
+            // Məlumatlar
             foreach ($forms as $form) {
                 fputcsv($file, [
                     $form->name,
@@ -50,7 +53,7 @@ class ContactFormController extends Controller
                     $form->service,
                     $form->formType ?? '-',
                     $form->created_at->timezone('Asia/Baku')->format('d.m.Y H:i:s'),
-                ]);
+                ], ';');
             }
 
             fclose($file);
@@ -58,6 +61,7 @@ class ContactFormController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
 
 
 
