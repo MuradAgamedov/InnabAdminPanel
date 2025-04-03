@@ -28,12 +28,8 @@
                     <td class="px-6 py-4">{{ $form->name }}</td>
                     <td class="px-6 py-4">{{ $form->phone }}</td>
                     <td class="px-6 py-4">{{ $form->fin }}</td>
-                    <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($form->date)->format('d.m.Y') }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($form->created_at)->timezone('Asia/Baku')->format('d.m.Y H:i:s') }}
-                    </td>
+                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($form->date)->format('d.m.Y') }}</td>
+                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($form->created_at)->timezone('Asia/Baku')->format('d.m.Y H:i:s') }}</td>
                     <td class="px-6 py-4 text-right">
                         <button
                             onclick="openModal(this)"
@@ -79,7 +75,6 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 
@@ -100,7 +95,7 @@
         const createdAtRaw = button.getAttribute('data-created-at');
         if (createdAtRaw) {
             const createdAt = new Date(createdAtRaw);
-            createdAt.setHours(createdAt.getHours() + 4); // Asia/Baku GMT+4
+            createdAt.setHours(createdAt.getHours() + 4);
             const formatted = createdAt.toLocaleString('az-AZ');
             document.getElementById('modalCreatedAt').textContent = formatted;
         } else {
@@ -111,12 +106,11 @@
         document.getElementById('modalEducation').textContent = getValue('education', 'education_other');
         document.getElementById('modalStudentStatus').textContent = getValue('student_status', 'student_status_other');
         document.getElementById('modalWorkStatus').textContent = getValue('work_status', 'work_status_other');
-
         document.getElementById('modalVoen').textContent = button.getAttribute('data-voen') || '-';
         document.getElementById('modalAddress').textContent = button.getAttribute('data-address') || '-';
 
-        const cvFile = button.getAttribute('data-cv-path');
-        document.getElementById('modalCv').href = cvFile ? `/storage/${cvFile}` : '#';
+        const cvPath = button.getAttribute('data-cv-path');
+        document.getElementById('modalCv').href = cvPath ? `/storage/${cvPath}` : '#';
 
         document.getElementById('formModal').classList.remove('hidden');
     }
