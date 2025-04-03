@@ -59,14 +59,14 @@
 
     <!-- Modal -->
     <div id="formModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
-            <h3 class="text-xl font-semibold mb-4">Müraciət Məlumatları</h3>
-            <p><strong>Ad Soyad:</strong> <span id="modalName"></span></p>
-            <p><strong>Form Tipi:</strong> <span id="modalFormType"></span></p>
-            <p><strong>Telefon:</strong> <span id="modalPhone"></span></p>
-            <p><strong>Ünvan:</strong> <span id="modalAddress"></span></p>
-            <div class="mt-4 text-right">
-                <button onclick="closeModal()" class="px-4 py-2 bg-red-500 text-white rounded">Bağla</button>
+        <div class="bg-white p-8 rounded-lg shadow-lg w-2/3 md:w-1/2 lg:w-1/3">
+            <h3 class="text-2xl font-semibold mb-6">Müraciət Məlumatları</h3>
+            <p><strong class="text-lg">Ad Soyad:</strong> <span id="modalName" class="text-xl font-semibold"></span></p>
+            <p><strong class="text-lg">Form Tipi:</strong> <span id="modalFormType" class="text-xl font-semibold"></span></p>
+            <p><strong class="text-lg">Telefon:</strong> <span id="modalPhone" class="text-xl font-semibold"></span></p>
+            <p><strong class="text-lg">Ünvan:</strong> <span id="modalAddress" class="text-xl font-semibold"></span></p>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal()" class="px-6 py-3 bg-red-500 text-white rounded text-lg">Bağla</button>
             </div>
         </div>
     </div>
