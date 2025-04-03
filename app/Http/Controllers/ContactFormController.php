@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\CarrierAndScholarshipForm;
-use App\Models\ContactForm;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ContactFormsExport;
 
+use App\Models\ContactForm;
+
+
+
+use OpenSpout\Writer\Common\Creator\WriterEntityFactory;
 
 class ContactFormController extends Controller
 {
@@ -23,13 +23,76 @@ class ContactFormController extends Controller
         return redirect()->route('contact-forms.index')->with('success', 'Form silindi.');
     }
 
-    public function exportExcel()
+    public function exportCsv()
     {
-        return Excel::download(new ContactFormsExport, 'muracietler.xlsx');
+        $forms = ContactForm::all();
+
+        $filename = "forms_" . now()->format('Y_m_d_H_i_s') . ".csv";
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$filename",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $callback = function () use ($forms) {
+            $file = fopen('php://output', 'w');
+
+            // Header
+            fputcsv($file, ['Ad Soyad', 'Telefon', 'Xidmət', 'Form Tipi', 'Göndərilmə Tarixi']);
+
+            // Data
+            foreach ($forms as $form) {
+                fputcsv($file, [
+                    $form->name,
+                    $form->phone,
+                    $form->service,
+                    $form->formType ?? '-',
+                    $form->created_at->timezone('Asia/Baku')->format('d.m.Y H:i:s'),
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
-    public function exportCSV()
+
+
+    public function exportXlsx()
     {
-        return Excel::download(new ContactFormsExport, 'muracietler.csv', \Maatwebsite\Excel\Excel::CSV);
+        $forms = ContactForm::all();
+
+        $filename = storage_path('app/public/forms_' . now()->format('Y_m_d_H_i_s') . '.xlsx');
+
+        $writer = WriterEntityFactory::createXLSXWriter();
+        $writer->openToFile($filename);
+
+        $header = WriterEntityFactory::createRowFromArray([
+            'Ad Soyad',
+            'Telefon',
+            'Xidmət',
+            'Form Tipi',
+            'Göndərilmə Tarixi'
+        ]);
+
+        $writer->addRow($header);
+
+        foreach ($forms as $form) {
+            $row = WriterEntityFactory::createRowFromArray([
+                $form->name,
+                $form->phone,
+                $form->service,
+                $form->formType ?? '-',
+                $form->created_at->timezone('Asia/Baku')->format('d.m.Y H:i:s'),
+            ]);
+            $writer->addRow($row);
+        }
+
+        $writer->close();
+
+        return response()->download($filename)->deleteFileAfterSend();
     }
 }

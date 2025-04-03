@@ -10,8 +10,9 @@
 
     <div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
         <div class="flex justify-end mb-4 gap-4">
-            <a href="{{ route('contact-forms.export.excel') }}" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md">📄 Excel Export</a>
-            <a href="{{ route('contact-forms.export.csv') }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md">📄 CSV Export</a>
+            <a href="{{ route('contact-forms.export.csv') }}" class="btn btn-sm btn-success">CSV Export</a>
+            <a href="{{ route('contact-forms.export.xlsx') }}" class="btn btn-sm btn-primary">Excel Export</a>
+
         </div>
         <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center print:hidden">
             <div class="grow">

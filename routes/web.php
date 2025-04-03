@@ -17,8 +17,10 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('admin.logout'
 
 Route::get('/contact-forms', [ContactFormController::class, 'index'])->name('contact-forms.index');
 Route::get('/contact-forms/{id}/delete', [ContactFormController::class, 'destroy'])->name('contact-forms.destroy');
-Route::get('/contact-forms/export/excel', [ContactFormController::class, 'exportExcel'])->name('contact-forms.export.excel');
-Route::get('/contact-forms/export/csv', [ContactFormController::class, 'exportCSV'])->name('contact-forms.export.csv');
+Route::get('/contact-forms/export/csv', [ContactFormController::class, 'exportCsv'])->name('contact-forms.export.csv');
+
+Route::get('/contact-forms/export/xlsx', [ContactFormController::class, 'exportXlsx'])->name('contact-forms.export.xlsx');
+
 
 
 

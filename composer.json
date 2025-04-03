@@ -9,7 +9,6 @@
         "google/apiclient": "^2.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "maatwebsite/excel": "^1.1",
         "mcamara/laravel-localization": "^2.0",
         "nwidart/laravel-modules": "^11.0",
         "spatie/laravel-translatable": "^6.7"
