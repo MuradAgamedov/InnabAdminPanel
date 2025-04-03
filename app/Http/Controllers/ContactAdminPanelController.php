@@ -13,7 +13,7 @@ class ContactAdminPanelController extends Controller
             'name' => 'required|string',
             'phone' => 'required',
             'email' => 'nullable|email',
-            'form_type' => 'nullable|string',
+            'formType' => 'nullable|string',
             'service' => 'nullable|string',
         ]);
 
@@ -22,7 +22,7 @@ class ContactAdminPanelController extends Controller
         }
 
         try {
-            ContactForm::create($request->only(['name', 'phone', 'email', 'form_type', 'service']));
+            ContactForm::create($request->only(['name', 'phone', 'email', 'formType', 'service']));
 
             return response()->json(['success' => true, 'message' =>  $request->all()]);
         } catch (\Exception $e) {
