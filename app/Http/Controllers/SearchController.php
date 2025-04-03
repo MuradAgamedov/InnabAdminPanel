@@ -14,7 +14,7 @@ class SearchController extends Controller
 
     public function __construct()
     {
-        $this->domain = "admin.innab.az";
+        $this->domain = "https://admin.innab.az";
 
     }
     public function search(Request $request) {
