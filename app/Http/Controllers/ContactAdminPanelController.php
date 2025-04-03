@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactForm;
+use App\Models\WebinarForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 class ContactAdminPanelController extends Controller
