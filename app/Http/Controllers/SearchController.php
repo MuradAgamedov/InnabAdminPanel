@@ -35,10 +35,11 @@ class SearchController extends Controller
         app()->setLocale($lang);
         $query = strtolower($params);
 
-        $trainings = \Modules\Training\Models\Training::whereRaw(
+        $trainings = \Modules\Training\Models\Training::with('category')->whereRaw(
             'LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.' . $lang . '"))) LIKE ?',
             ["%{$query}%"]
         )->paginate($perPage);
+
 
         $data = $trainings->map(function ($item) use ($lang) {
             return [
@@ -92,11 +93,11 @@ class SearchController extends Controller
     {
         app()->setLocale($lang);
         $query = strtolower($params);
-
-        $blogs = \Modules\Blog\Models\Blog::whereRaw(
+        $blogs = \Modules\Blog\Models\Blog::with('category')->whereRaw(
             'LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, "$.' . $lang . '"))) LIKE ?',
             ["%{$query}%"]
         )->paginate($perPage);
+
 
         $data = $blogs->map(function ($item) use ($lang) {
             return [
