@@ -23,7 +23,6 @@
             </thead>
             <tbody class="text-gray-700">
                 @foreach($forms as $form)
-                {{dd($form)}}
                 <tr class="border-b">
                     <td class="px-6 py-4">{{ $form->name }}</td>
                     <td class="px-6 py-4">{{ $form->phone }}</td>
