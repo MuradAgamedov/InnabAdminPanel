@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ContactFormsExport implements FromCollection, WithHeadings, WithMapping
+class ContactFormsExport 
 {
     public function collection()
     {
