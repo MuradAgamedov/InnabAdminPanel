@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactForm;
 use App\Models\WebinarForm;
+use App\Models\WorkshopForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 class ContactAdminPanelController extends Controller
@@ -47,6 +48,29 @@ class ContactAdminPanelController extends Controller
 
         try {
             WebinarForm::create($request->only(['name', 'phone', 'email', 'service']));
+
+            return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla yadda saxlanıldı']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Məlumatların göndərilməsi alınmadı', 'details' => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function workshop(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'phone' => 'required',
+            'email' => 'nullable|email',
+            'service' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        try {
+            WorkshopForm::create($request->only(['name', 'phone', 'email', 'service']));
 
             return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla yadda saxlanıldı']);
         } catch (\Exception $e) {
