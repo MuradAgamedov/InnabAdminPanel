@@ -28,6 +28,7 @@ Route::get('/contact-forms/export/csv', [ContactFormController::class, 'exportCs
 
 Route::get('/webinar-forms', [WebinarFormController::class, 'index'])->name('webinar-forms.index');
 Route::get('/webinar-forms/{id}/delete', [WebinarFormController::class, 'destroy'])->name('webinar-forms.destroy');
+Route::get('/webinar-forms/export/csv', [WebinarFormController::class, 'exportCsv'])->name('webinar-forms.export.csv');
 
 
 
