@@ -10,6 +10,14 @@ use Modules\VideoLessons\Models\VideoLessons;
 
 class SearchController extends Controller
 {
+    public $table_token;
+    public $cvUploadFolderId;
+
+    public function __construct()
+    {
+        $this->table_token = env('table_token');
+        $this->cvUploadFolderId = env('CV_UPLOAD_FOLDER_ID');
+    }
     public function search(Request $request) {
         $query = $request->q;
         $trainings = Training::where('title', 'LIKE', "%$query%")->paginate(5);
@@ -26,7 +34,7 @@ class SearchController extends Controller
     public function search_trainings($lang, $params, $perPage = 6)
     {
         app()->setLocale($lang);
-        dd(env('table_token'));
+        dd($this->table_token);
         $query = strtolower($params);
 
         $trainings = \Modules\Training\Models\Training::where(function ($q) use ($query) {
