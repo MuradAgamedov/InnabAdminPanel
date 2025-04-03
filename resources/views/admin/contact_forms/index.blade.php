@@ -29,7 +29,7 @@
                             @foreach($forms as $form)
                             <tr class="border-b">
                                 <td class="px-6 py-4">{{ $form->name }}</td>
-                                <td class="px-6 py-4">{{ $form->form_type }}</td>
+                                <td class="px-6 py-4">{{ $form->formType }}</td>
                                 <td class="px-6 py-4 text-right">
                                     <!-- Oxu Düyməsi -->
                                     <button
