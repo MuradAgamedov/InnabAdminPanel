@@ -10,13 +10,12 @@ use Modules\VideoLessons\Models\VideoLessons;
 
 class SearchController extends Controller
 {
-    public $table_token;
-    public $cvUploadFolderId;
+    public $domain;
 
     public function __construct()
     {
-        $this->table_token = env('table_token');
-        $this->cvUploadFolderId = env('CV_UPLOAD_FOLDER_ID');
+        $this->domain = "admin.innab.az";
+
     }
     public function search(Request $request) {
         $query = $request->q;
@@ -33,8 +32,7 @@ class SearchController extends Controller
 
     public function search_trainings($lang, $params, $perPage = 6)
     {
-        app()->setLocale($lang);
-        dd($this->table_token);
+
         $query = strtolower($params);
 
         $trainings = \Modules\Training\Models\Training::where(function ($q) use ($query) {
@@ -58,7 +56,7 @@ class SearchController extends Controller
                 'seo_description' => $item->getTranslation('seo_description', $lang) ?? $item->getTranslation('seo_description', 'en'),
                 'seo_links' => $item->seo_links,
                 'seo_scripts' => $item->seo_scripts,
-                'image_url' => env('APP_URL') ,
+                'image_url' => $this->domain ,
                 'image_alt' => $item->getTranslation('image_alt', $lang) ?? $item->getTranslation('image_alt', 'en'),
                 'order' => $item->order,
                 'status' => $item->status,
