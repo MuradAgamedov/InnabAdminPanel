@@ -33,7 +33,6 @@
     29 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     30 => 'Spatie\\Translatable\\TranslatableServiceProvider',
     31 => 'App\\Providers\\AppServiceProvider',
-    32 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,7 +53,6 @@
     14 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     15 => 'Spatie\\Translatable\\TranslatableServiceProvider',
     16 => 'App\\Providers\\AppServiceProvider',
-    17 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (
