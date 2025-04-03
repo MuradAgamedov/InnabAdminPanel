@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @push('styles')
-
 @endpush
 
 @section('content')
@@ -38,7 +37,8 @@
                                         data-name="{{ $form->name }}"
                                         data-form_type="{{ $form->formType }}"
                                         data-phone="{{ $form->phone }}"
-                                        data-address="{{ $form->address }}">
+                                        data-address="{{ $form->address }}"
+                                        data-created_at="{{ $form->created_at }}">
                                         Oxu
                                     </button>
 
@@ -65,6 +65,7 @@
             <p><strong>Form Tipi:</strong> <span id="modalFormType" class="text-lg"></span></p>
             <p><strong>Telefon:</strong> <span id="modalPhone" class="text-lg"></span></p>
             <p><strong>Ünvan:</strong> <span id="modalAddress" class="text-lg"></span></p>
+            <p><strong>Müraciət Tarixi:</strong> <span id="modalCreatedAt" class="text-lg"></span></p>
             <div class="mt-4 text-right">
                 <button onclick="closeModal()" class="px-4 py-2 bg-red-500 text-white rounded">Bağla</button>
             </div>
@@ -82,6 +83,21 @@
         document.getElementById('modalFormType').textContent = button.getAttribute('data-form_type');
         document.getElementById('modalPhone').textContent = button.getAttribute('data-phone');
         document.getElementById('modalAddress').textContent = button.getAttribute('data-address');
+
+        // Müraciət tarixini Azərbaycan vaxtı ilə göstəririk
+        let createdAt = new Date(button.getAttribute('data-created_at'));
+        let options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'Asia/Baku', // Azerbaijan timezone
+            timeZoneName: 'short'
+        };
+        document.getElementById('modalCreatedAt').textContent = createdAt.toLocaleString('en-US', options);
 
         // Modalı açırıq
         document.getElementById('formModal').classList.remove('hidden');
