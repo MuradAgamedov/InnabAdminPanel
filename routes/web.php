@@ -19,7 +19,7 @@ Route::get('/contact-forms', [ContactFormController::class, 'index'])->name('con
 Route::get('/contact-forms/{id}/delete', [ContactFormController::class, 'destroy'])->name('contact-forms.destroy');
 Route::get('/contact-forms/export/csv', [ContactFormController::class, 'exportCsv'])->name('contact-forms.export.csv');
 
-Route::get('/contact-forms/export/xlsx', [ContactFormController::class, 'exportXlsx'])->name('contact-forms.export.xlsx');
+
 
 
 
