@@ -79,32 +79,31 @@
 @push('scripts')
 <script>
     function openModal(button) {
-        // Modal məlumatlarını doldururuq
         document.getElementById('modalName').textContent = button.getAttribute('data-name');
         document.getElementById('modalFormType').textContent = button.getAttribute('data-form_type');
         document.getElementById('modalPhone').textContent = button.getAttribute('data-phone');
         document.getElementById('modalService').textContent = button.getAttribute('data-service');
 
+        // Tarixi götür və 4 saat əlavə et (Azərbaycan vaxtı üçün)
         let createdAt = new Date(button.getAttribute('data-created_at'));
-        let options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            timeZone: 'Asia/Baku' // Azərbaycan vaxtında göstər
-            // timeZoneName çıxarıldı
-        };
-        document.getElementById('modalCreatedAt').textContent = createdAt.toLocaleString('az-AZ', options);
+        createdAt.setHours(createdAt.getHours() + 4);
 
-        document.getElementById('modalCreatedAt').textContent = createdAt.toLocaleString('az-AZ', options);
+        // Tarixi formatla (sadece tarix və saat)
+        const day = createdAt.getDate().toString().padStart(2, '0');
+        const month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
+        const year = createdAt.getFullYear();
+        const hours = createdAt.getHours().toString().padStart(2, '0');
+        const minutes = createdAt.getMinutes().toString().padStart(2, '0');
+        const seconds = createdAt.getSeconds().toString().padStart(2, '0');
 
+        // Format: 03.04.2025 14:35:12
+        const formatted = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
 
-        // Modalı göstəririk
+        document.getElementById('modalCreatedAt').textContent = formatted;
+
         document.getElementById('formModal').classList.remove('hidden');
     }
+
 
     function closeModal() {
         document.getElementById('formModal').classList.add('hidden');
