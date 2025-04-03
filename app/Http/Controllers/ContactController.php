@@ -76,7 +76,7 @@ class ContactController extends Controller
             $values = [[$request->name, $request->phone, $request->email, $request->formType, $request->service]];
             $this->appendToGoogleSheet($this->table_token, 'innab-contact-form', $values);
 
-            return response()->json(['success' => true, 'message' => $request->all()]);
+            return response()->json(['success' => true, 'message' => 'Data successfully sent to Google Sheets']);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send data to Google Sheets', 'details' => $e->getMessage()], 500);
         }

@@ -24,7 +24,7 @@ class ContactAdminPanelController extends Controller
         try {
             ContactForm::create($request->only(['name', 'phone', 'email', 'form_type', 'service']));
 
-            return response()->json(['success' => true, 'message' => 'Məlumatlar uğurla yadda saxlanıldı']);
+            return response()->json(['success' => true, 'message' =>  $request->all()]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Məlumatların göndərilməsi alınmadı', 'details' => $e->getMessage()], 500);
         }
