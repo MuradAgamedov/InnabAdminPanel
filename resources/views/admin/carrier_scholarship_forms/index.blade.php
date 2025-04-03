@@ -53,17 +53,18 @@
         <div class="bg-white p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 max-h-[90vh] overflow-y-auto">
             <h3 class="text-xl font-semibold mb-4">Müraciət Məlumatları</h3>
 
-            <p><strong>Ad Soyad:</strong> <span id="modalName" class="text-lg"></span></p>
-            <p><strong>FIN:</strong> <span id="modalFin" class="text-lg"></span></p>
-            <p><strong>Telefon:</strong> <span id="modalPhone" class="text-lg"></span></p>
-            <p><strong>Tarix:</strong> <span id="modalDate" class="text-lg"></span></p>
-            <p><strong>Layihə:</strong> <span id="modalProject" class="text-lg"></span></p>
-            <p><strong>Təhsil:</strong> <span id="modalEducation" class="text-lg"></span></p>
-            <p><strong>Tələbə Statusu:</strong> <span id="modalStudentStatus" class="text-lg"></span></p>
-            <p><strong>İş Statusu:</strong> <span id="modalWorkStatus" class="text-lg"></span></p>
-            <p><strong>VOEN:</strong> <span id="modalVoen" class="text-lg"></span></p>
-            <p><strong>Ünvan:</strong> <span id="modalAddress" class="text-lg"></span></p>
-            <p><strong>CV:</strong> <a id="modalCv" href="#" target="_blank" class="text-blue-600 underline">Bax</a></p>
+            <p class="text-gray-800"><strong>Ad Soyad:</strong> <span id="modalName" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>FIN:</strong> <span id="modalFin" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>Telefon:</strong> <span id="modalPhone" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>Tarix:</strong> <span id="modalDate" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>Layihə:</strong> <span id="modalProject" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>Təhsil:</strong> <span id="modalEducation" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>Tələbə Statusu:</strong> <span id="modalStudentStatus" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>İş Statusu:</strong> <span id="modalWorkStatus" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>VOEN:</strong> <span id="modalVoen" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>Ünvan:</strong> <span id="modalAddress" class="text-lg font-medium"></span></p>
+            <p class="text-gray-800"><strong>CV:</strong> <a id="modalCv" href="#" target="_blank" class="text-blue-600 underline">Bax</a></p>
+
 
             <div class="mt-4 text-right">
                 <button onclick="closeModal()" class="px-4 py-2 bg-red-500 text-white rounded">Bağla</button>
