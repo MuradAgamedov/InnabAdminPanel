@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CarrierAndScholarshipForm;
 use App\Models\ContactForm;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ContactFormsExport;
+
 
 class ContactFormController extends Controller
 {
@@ -18,5 +21,15 @@ class ContactFormController extends Controller
     {
         ContactForm::findOrFail($id)->delete();
         return redirect()->route('contact-forms.index')->with('success', 'Form silindi.');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ContactFormsExport, 'muracietler.xlsx');
+    }
+
+    public function exportCSV()
+    {
+        return Excel::download(new ContactFormsExport, 'muracietler.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }

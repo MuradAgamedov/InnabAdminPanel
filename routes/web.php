@@ -13,8 +13,15 @@ Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('
 Route::get('/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/login', [LoginController::class, 'login'])->name('admin.login.post');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('admin.logout')->middleware('auth');
+
+
 Route::get('/contact-forms', [ContactFormController::class, 'index'])->name('contact-forms.index');
 Route::get('/contact-forms/{id}/delete', [ContactFormController::class, 'destroy'])->name('contact-forms.destroy');
+Route::get('/contact-forms/export/excel', [ContactFormController::class, 'exportExcel'])->name('contact-forms.export.excel');
+Route::get('/contact-forms/export/csv', [ContactFormController::class, 'exportCSV'])->name('contact-forms.export.csv');
+
+
+
 
 
 Route::get('/webinar-forms', [WebinarFormController::class, 'index'])->name('webinar-forms.index');
@@ -29,6 +36,9 @@ Route::get('/workshop-forms/{id}/delete', [WorkshopFormController::class, 'destr
 
 Route::get('/carrier-scholarship-forms', [CarrierAndScholarshipFormController::class, 'index'])->name('carrier-forms.index');
 Route::get('/carrier-scholarship-forms/{id}/delete', [CarrierAndScholarshipFormController::class, 'destroy'])->name('carrier-forms.destroy');
+
+
+
 
 
 Route::get('/simple-route', function () {
