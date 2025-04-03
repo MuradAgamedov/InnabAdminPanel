@@ -68,6 +68,6 @@ class ContactFormController extends Controller
     public function exportXlsx()
     {
         $fileName = "forms_" . now()->format('Y_m_d_H_i_s') . ".xlsx";
-        return Excel::download(new ContactFormsExport, $fileName);
+        return Excel::download(new ContactFormsExporT, $fileName);
     }
 }
