@@ -96,9 +96,10 @@ class TrainingApiController extends Controller
             $translatedData['image'] = $this->domain . '/' . ltrim($image->url, '/');
         }
         $file = $training->file;
-        if($file) {
-            $translatedData['file'] = $this->domain . '/' . ltrim($image->file, '/');
-        }
+        $translatedData['file'] = $file
+            ? $this->domain . '/' . ltrim($image->file, '/')
+            : null;
+
         // Kateqoriya varsa, tərcüməsi ilə birlikdə əlavə et
         if ($training->category) {
             $translatedData['category'] = [
