@@ -104,7 +104,7 @@ class TrainingApiController extends Controller
         if ($training->category) {
             $translatedData['category'] = [
                 'id' => $training->category->id,
-                'slug' => $training->category->slug[$locale] ?? null,
+                'slug' => $training->category->slug ?? null,
                 'title' => $training->category->getTranslation('title', $locale),
             ];
         } else {
