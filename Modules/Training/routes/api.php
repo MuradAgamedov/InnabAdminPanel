@@ -24,4 +24,6 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 Route::prefix('{locale}')->group(function () {
     Route::get('/get_trainings/{id}', [TrainingApiController::class, 'get_trainings'])->name('training.get_trainings');
+
+    Route::get('/get_trainings_by_slug/{id}', [TrainingApiController::class, 'get_trainings_by_slug'])->name('training.get_trainings_by_slug');
 });
