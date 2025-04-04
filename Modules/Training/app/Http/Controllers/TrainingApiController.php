@@ -63,11 +63,12 @@ class TrainingApiController extends Controller
 
     public function get_trainings_by_slug($locale, $slug)
     {
-        // Lokalizasiya
-        app()->setLocale($locale);
 
+        app()->setLocale($locale);
         // Training + category əlaqəsi ilə birlikdə gətirilir
-        $training = Training::with('category')->where("slug->{$locale}", $slug)->first();
+        $training = Training::with('category')
+            ->where('slug', 'LIKE', '%' . strtolower($slug) . '%')
+            ->first();
 
         // Tapılmazsa 404
         if (!$training) {
