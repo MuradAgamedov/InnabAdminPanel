@@ -63,38 +63,50 @@ class TrainingApiController extends Controller
 
     public function get_trainings_by_slug($locale, $slug)
     {
+        // Lokalizasiya
         app()->setLocale($locale);
 
-        $training = Training::where("slug->{$locale}", $slug)->first();
+        // Training + category əlaqəsi ilə birlikdə gətirilir
+        $training = Training::with('category')->where("slug->{$locale}", $slug)->first();
 
+        // Tapılmazsa 404
         if (!$training) {
             return response()->json([
                 'error' => 'Training not found.'
             ], 404);
         }
 
-        // Fetch the training data as an array
+        // Training məlumatı array şəklində
         $trainingData = $training->toArray();
 
-        // Initialize the translatedData array with all training data
+        // Tərcümə olunmuş data
         $translatedData = $trainingData;
 
-        // Loop through the translatable fields and add the translation for the specific locale
+        // Translatable sahələri tərcümə et
         foreach ($training->translatable as $attribute) {
             $translatedData[$attribute] = $training->getTranslation($attribute, $locale);
         }
 
-        // Add image data if it exists
-        $image = $training->image;  // Get the related image
+        // Şəkil varsa əlavə et
+        $image = $training->image;
         if ($image) {
-            // Check if image_alt exists and add it
-            $translatedData['image_alt'] = $training->image_alt ?? null;  // If image_alt exists, add it; otherwise null
-            // Add image_alt_text (fallback for image_alt)
-            $translatedData['image_alt_text'] = $training->image_alt ?? ''; // If image_alt exists, use it; otherwise empty string
-            // Add image URL
-            $translatedData['image'] = $this->domain."/".$image->url;
+            $translatedData['image_alt'] = $training->image_alt ?? null;
+            $translatedData['image_alt_text'] = $training->image_alt ?? '';
+            $translatedData['image'] = $this->domain . '/' . ltrim($image->url, '/');
         }
 
+        // Kateqoriya varsa, tərcüməsi ilə birlikdə əlavə et
+        if ($training->category) {
+            $translatedData['category'] = [
+                'id' => $training->category->id,
+                'slug' => $training->category->slug[$locale] ?? null,
+                'title' => $training->category->getTranslation('title', $locale),
+            ];
+        } else {
+            $translatedData['category'] = null;
+        }
+
+        // Cavab
         return response()->json([
             'data' => $translatedData
         ]);
