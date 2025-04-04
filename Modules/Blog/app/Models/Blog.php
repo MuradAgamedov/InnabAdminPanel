@@ -44,9 +44,9 @@ class Blog extends Model
         return $this->hasMany(BlogContent::class, 'blog_id');
     }
 
-
-    protected static function newFactory(): BlogFactory
+    public function category()
     {
-        //return BlogFactory::new();
+        return $this->belongsTo(\Modules\BlogCategory\Models\BlogCategory::class, 'category_id');
     }
+
 }

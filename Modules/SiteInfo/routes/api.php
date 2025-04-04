@@ -19,6 +19,9 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 Route::prefix('{locale}')->group(function () {
     Route::get('/get_siteinfo', [SiteInfoApiController::class, 'get_siteinfo'])->name('siteinfo.get_siteinfo');
+
+    Route::get('/search_trainings/{param}', [SearchController::class, 'search_trainings'])->name('search_trainings');
+    Route::get('/search_blogs/{param}', [SearchController::class, 'search_blogs'])->name('search_blogs');
 });
 
 
@@ -35,5 +38,6 @@ Route::post('/carrier_and_schoolarship/post', [ContactAdminPanelController::clas
 
 
 Route::get('/google_datas/get', [GoogleDatasController::class, 'google_datas'])->name('google_datas.get');
-Route::get('/search_trainings/{param}', [SearchController::class, 'search_trainings'])->name('search_trainings');
-Route::get('/search_blogs/{param}', [SearchController::class, 'search_blogs'])->name('search_blogs');
+
+
+
