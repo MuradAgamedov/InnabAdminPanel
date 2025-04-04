@@ -57,7 +57,9 @@ class SearchController extends Controller
                 'seo_description' => $item->getTranslation('seo_description', $lang),
                 'seo_links' => $item->seo_links,
                 'seo_scripts' => $item->seo_scripts,
-                'image_url' => $item->image ? $this->domain . '/' . $item->image->url : null,
+                'image_url' => optional($item->main_images)->where('type', "main_image_training_" . $lang)->first()
+                    ? config('app.url') . '/' . optional($item->main_images)->where('type', "main_image_training_" . $lang)->first()->url
+                    : null,
                 'image_alt_text' => $item->getTranslation('image_alt', $lang),
                 'order' => $item->order,
                 'status' => $item->status,
