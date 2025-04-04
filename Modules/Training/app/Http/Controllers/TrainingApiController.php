@@ -66,7 +66,7 @@ class TrainingApiController extends Controller
 
         app()->setLocale($locale);
         // Training + category əlaqəsi ilə birlikdə gətirilir
-        $training = Training::with('category')
+        $training = Training::with(['category', 'file'])
             ->where('slug', 'LIKE', '%' . strtolower($slug) . '%')
             ->first();
 
@@ -95,7 +95,10 @@ class TrainingApiController extends Controller
             $translatedData['image_alt_text'] = $training->image_alt ?? '';
             $translatedData['image'] = $this->domain . '/' . ltrim($image->url, '/');
         }
-
+        $file = $training->file;
+        if($file) {
+            $translatedData['file'] = $this->domain . '/' . ltrim($image->file, '/');
+        }
         // Kateqoriya varsa, tərcüməsi ilə birlikdə əlavə et
         if ($training->category) {
             $translatedData['category'] = [
