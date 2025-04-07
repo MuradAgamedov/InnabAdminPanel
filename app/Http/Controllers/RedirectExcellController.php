@@ -38,6 +38,6 @@ class RedirectExcellController extends Controller
         foreach($rows as $row) {
             Redirect::create(['old_url' => $row[0], 'new_url' => $row[1], 'status_code' => "301"]);
         }
-        return view("admin.redirect.index");
+        return view("redirect.index");
     }
 }
