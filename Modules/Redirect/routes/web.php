@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RedirectExcellController;
 use Illuminate\Support\Facades\Route;
 use Modules\Redirect\Http\Controllers\RedirectController;
 
@@ -19,4 +20,9 @@ Route::group(['prefix' => "admin", 'middleware' => 'auth'], function () {
     Route::get('/redirect/changeStatusFalse/{id}', [RedirectController::class, 'changeStatusFalse'])->name('redirect.changeStatusFalse');
     Route::get('/redirect/changeStatusTrue/{id}', [RedirectController::class, 'changeStatusTrue'])->name('redirect.changeStatusTrue');
     Route::get('/redirect/deleteFile/{id}', [RedirectController::class, 'deleteFile'])->name('redirect.deleteFile');
+
+
+    Route::get('/redirect_excel/create', [RedirectExcellController::class, 'create'])->name('redirect_excel.create');
+
+    Route::post('/redirect_excel/store', [RedirectExcellController::class, 'store'])->name('redirect_excel.store');
 });

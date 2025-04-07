@@ -127,9 +127,7 @@ return [
     // config/app.php
 
     'aliases' => [
-
         'ServiceFacade' => ServiceFacade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
