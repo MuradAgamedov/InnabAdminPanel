@@ -33,8 +33,8 @@ class RedirectExcellController extends Controller
         $sheet = $spreadsheet->getActiveSheet();
         $data = $sheet->toArray();
 
-        $filtered = array_diff_key($data[0], ['column_to_exclude' => '']);
+        $rows = array_slice($data, 1);
 
-        dd($filtered);
+        dd($rows);
     }
 }
