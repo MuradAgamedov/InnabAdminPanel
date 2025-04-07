@@ -4,7 +4,6 @@
 <style>
     .form {
         width: 600px;
-        /* Fixed width of 600px */
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -16,7 +15,6 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        /* Full viewport height */
     }
 
     input[type="file"] {
@@ -33,7 +31,6 @@
         border-color: #4CAF50;
     }
 
-    /* Optional: Style the file input label */
     .file-label {
         display: inline-block;
         padding: 8px 15px;
@@ -42,11 +39,17 @@
         border-radius: 5px;
         cursor: pointer;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .file-label:hover {
         background-color: #45a049;
+    }
+
+    #file-name {
+        font-style: italic;
+        color: #555;
+        margin-bottom: 15px;
     }
 
     button[type="submit"] {
@@ -68,28 +71,48 @@
 @endpush
 
 @section('content')
-<div class="group-data-[sidebar-size=lg]:ltr:md:ml-vertical-menu group-data-[sidebar-size=lg]:rtl:md:mr-vertical-menu group-data-[sidebar-size=md]:ltr:ml-vertical-menu-md group-data-[sidebar-size=md]:rtl:mr-vertical-menu-md group-data-[sidebar-size=sm]:ltr:ml-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:mr-vertical-menu-sm pt-[calc(theme('spacing.header')_*_1)] pb-[calc(theme('spacing.header')_*_0.8)] px-4 group-data-[navbar=bordered]:pt-[calc(theme('spacing.header')_*_1.3)] group-data-[navbar=hidden]:pt-0 group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:px-0 group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:ltr:md:ml-auto group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:rtl:md:mr-auto group-data-[layout=horizontal]:md:pt-[calc(theme('spacing.header')_*_1.6)] group-data-[layout=horizontal]:px-3 group-data-[layout=horizontal]:group-data-[navbar=hidden]:pt-[calc(theme('spacing.header')_*_0.9)]">
-    <div class="form-container">
-        <div class="form">
-            <form method="post" action="{{ route('redirect_excel.store') }}" enctype="multipart/form-data" class="max-w-lg mx-auto">
-                @csrf
+<div class="form-container">
+    <div class="form">
+        <form method="post" action="{{ route('redirect_excel.store') }}" enctype="multipart/form-data" class="max-w-lg mx-auto">
+            @csrf
 
-                <!-- Error message -->
-                @if ($errors->has('file'))
-                <div style="color: red; margin-bottom: 10px;">
-                    {{ $errors->first('file') }}
-                </div>
-                @endif
+            <!-- Validation Error -->
+            @if ($errors->has('file'))
+            <div style="color: red; margin-bottom: 10px;">
+                {{ $errors->first('file') }}
+            </div>
+            @endif
 
-                <!-- Custom label for file input -->
-                <label for="file-upload" class="file-label">Choose File</label>
-                <input type="file" id="file-upload" name="file" accept=".xls,.xlsx" style="display:none;">
+            <!-- File Upload -->
+            <label for="file-upload" class="file-label">Choose File</label>
+            <input type="file" id="file-upload" name="file" accept=".xls,.xlsx" style="display:none;">
+            <div id="file-name">No file selected.</div>
 
-                <!-- Submit Button -->
-                <button type="submit">Submit</button>
-            </form>
-
-        </div>
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const fileInput = document.getElementById("file-upload");
+        const fileNameDiv = document.getElementById("file-name");
+        const fileLabel = document.querySelector(".file-label");
+
+        fileLabel.addEventListener("click", function() {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener("change", function() {
+            if (fileInput.files.length > 0) {
+                fileNameDiv.textContent = "Selected file: " + fileInput.files[0].name;
+            } else {
+                fileNameDiv.textContent = "No file selected.";
+            }
+        });
+    });
+</script>
+@endpush
