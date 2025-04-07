@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Modules\Redirect\Models\Redirect;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class RedirectExcellController extends Controller
@@ -34,7 +35,9 @@ class RedirectExcellController extends Controller
         $data = $sheet->toArray();
 
         $rows = array_slice($data, 1);
-
-        dd($rows);
+        foreach($rows as $row) {
+            Redirect::create(['old_url' => $row[0], 'new_url' => $row[1], 'status_code' => "301"]);
+        }
+        return view("admin.redirect_excel.index");
     }
 }
