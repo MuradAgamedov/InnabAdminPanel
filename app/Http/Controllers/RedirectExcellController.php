@@ -16,7 +16,6 @@ class RedirectExcellController extends Controller
     public function store(Request $request)
     {
 
-        // Faylın validasiyası
         $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:xlsx,xls|max:10240',
         ]);
@@ -25,20 +24,17 @@ class RedirectExcellController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Faylı al
         $file = $request->file('file');
 
-        // Faylın tam yolunu əldə et
         $filePath = $file->getRealPath();
 
-        // Excel faylını yüklə
         $spreadsheet = IOFactory::load($filePath);
 
-        // İlk sheet-i array şəklində al
         $sheet = $spreadsheet->getActiveSheet();
         $data = $sheet->toArray();
 
-        // Məlumatı göstər
-        dd($data);
+        $filtered = array_diff_key($data[0], ['column_to_exclude' => '']);
+
+        dd($filtered);
     }
 }
