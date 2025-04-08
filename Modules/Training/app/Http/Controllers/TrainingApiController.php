@@ -92,8 +92,7 @@ class TrainingApiController extends Controller
             $translatedData['image_alt'] = $training->image_alt ?? null;
             $translatedData['image_alt_text'] = $training->image_alt ?? '';
             $imageData = $image->first(); // Get the first item from the collection
-            $imageUrl = $imageData['url']; // Access the 'url' attribute
-
+            $imageUrl = $imageData['url'] ?? 'panel/assets/images/not-found-image.jpg';
             $translatedData['image'] = $this->domain . '/' . ltrim($imageUrl, '/');
         }
         $file = $training->file;
