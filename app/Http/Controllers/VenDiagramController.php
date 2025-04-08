@@ -7,8 +7,14 @@ use Modules\Translate\Models\Translate;
 
 class VenDiagramController extends Controller
 {
-    public function get_venn_diagram_data() {
-        $data = Translate::where("group", "venn_diagram")->get();
+    public function get_venn_diagram_data($locale)
+    {
+        $data = Translate::where("group", "venn_diagram")->get()->map(function ($item) use ($locale) {
+            return [
+                'value' => $item->value[$locale] ?? null,
+            ];
+        });
+
         return response(['data' => $data]);
     }
 }
