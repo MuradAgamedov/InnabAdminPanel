@@ -89,11 +89,14 @@ class TrainingApiController extends Controller
         }
 
         // Şəkil varsa əlavə et
-        $image = $training->main_image;
+        $image = $training->main_images->where('type', "main_image_training_" . $locale);
         if ($image) {
             $translatedData['image_alt'] = $training->image_alt ?? null;
             $translatedData['image_alt_text'] = $training->image_alt ?? '';
-            $translatedData['image'] = $this->domain . '/' . ltrim($image->url, '/');
+            $imageData = $image->first(); // Get the first item from the collection
+            $imageUrl = $imageData['url']; // Access the 'url' attribute
+
+            $translatedData['image'] = $this->domain . '/' . ltrim($imageUrl, '/');
         }
         $file = $training->file;
         $translatedData['file'] = $file
