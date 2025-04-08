@@ -15,9 +15,12 @@ class VenDiagramController extends Controller
         // Retrieve all translations where the group is 'venn_diagram'
         $data = Translate::where("group", "venn_diagram")->get();
 
-        // Use map to transform the collection and extract the 'value' field
+        // Use map to transform the collection and extract both 'id' and 'value' fields
         $values = $data->map(function ($item) {
-            return $item->value ?? null;
+            return [
+                'id' => $item->id,
+                'value' => $item->value ?? null
+            ];
         });
 
         // Return the values as a JSON response
