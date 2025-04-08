@@ -13,12 +13,11 @@ class VenDiagramController extends Controller
 
         $values = [];
         foreach ($data as $el) {
-            $decodedValue = json_decode($el->value, true); // Decode the JSON string
-            if (isset($decodedValue[$locale])) {
-                $values[] = $decodedValue[$locale]; // Add the value for the specified locale
-            }
-        }
-        return response(['data' => $values]);
 
+            dd($el);
+            $values[] = $el->value[$locale] ?? null;
+        }
+
+        return response(['data' => $values]);
     }
 }
