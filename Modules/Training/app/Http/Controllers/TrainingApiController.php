@@ -89,7 +89,7 @@ class TrainingApiController extends Controller
         }
 
         // Şəkil varsa əlavə et
-        $image = $training->image;
+        $image = $training->main_image;
         if ($image) {
             $translatedData['image_alt'] = $training->image_alt ?? null;
             $translatedData['image_alt_text'] = $training->image_alt ?? '';
