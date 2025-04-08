@@ -92,8 +92,18 @@ class TrainingApiController extends Controller
             $translatedData['image_alt'] = $training->image_alt ?? null;
             $translatedData['image_alt_text'] = $training->image_alt ?? '';
             $imageData = $image->first(); // Get the first item from the collection
-            $imageUrl = $imageData['url'] ?? 'panel/assets/images/not-found-image.jpg';
-            $translatedData['image'] = $this->domain . '/' . ltrim($imageUrl, '/');
+            $defaultPath = 'panel/assets/images/not-found-image.jpg';
+            $defaultFullPath = public_path($defaultPath); // public qovluğundakı tam yol
+
+            if (!empty($imageData['url'])) {
+                $imageUrl = $imageData['url'];
+            } elseif (file_exists($defaultFullPath)) {
+                $imageUrl = $defaultPath;
+            } else {
+                $imageUrl = null;
+            }
+
+            $translatedData['image'] = $imageUrl ? $this->domain . '/' . ltrim($imageUrl, '/') : null;
         }
         $file = $training->file;
         $translatedData['file'] = $file
