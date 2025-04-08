@@ -9,6 +9,10 @@ class VenDiagramController extends Controller
 {
     public function get_venn_diagram_data($locale) {
         $data = Translate::where("group", "venn_diagram")->get();
+        $values = [];
+        foreach($data as $el) {
+            $values[] = $el[$locale];
+        }
         return response(['data' => $data]);
     }
 }
