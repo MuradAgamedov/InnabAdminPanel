@@ -13,7 +13,7 @@ class VenDiagramController extends Controller
         $values = [];
         for ($i = 0; $i <= $data->count(); $i++) {
 
-            dd($data[$i]);
+            dd($data[$i]->value);
             $values[] = $el->value[$locale] ?? null;
         }
 
