@@ -14,8 +14,7 @@ class VenDiagramController extends Controller
         $values = [];
         for ($i = 0; $i <= $data->count(); $i++) {
 
-            dd($data[$i]->value);
-            $values[] = $el->value[$locale] ?? null;
+            $values[] = $data[$i]->value ?? null;
         }
 
         return response(['data' => $values]);
