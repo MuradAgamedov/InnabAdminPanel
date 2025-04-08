@@ -11,6 +11,7 @@ class VenDiagramController extends Controller
         $data = Translate::where("group", "venn_diagram")->get();
         $values = [];
         foreach($data as $el) {
+            dd($el);
             $values[] = $el['value'][$locale];
         }
         return response(['data' => $values]);
