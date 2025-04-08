@@ -7,6 +7,7 @@ use Modules\SiteInfo\Http\Controllers\SiteInfoApiController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GoogleDatasController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VenDiagramController;
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::post('siteinfo/delete_selected_items', [SiteInfoController::class, 'delete_selected_items'])
@@ -22,6 +23,8 @@ Route::prefix('{locale}')->group(function () {
 
     Route::get('/search_trainings/{param}', [SearchController::class, 'search_trainings'])->name('search_trainings');
     Route::get('/search_blogs/{param}', [SearchController::class, 'search_blogs'])->name('search_blogs');
+
+    Route::get('/get_venn_diagram_data', [VenDiagramController::class, 'get_venn_diagram_data'])->name('get_venn_diagram_data');
 });
 
 
