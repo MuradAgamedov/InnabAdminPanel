@@ -11,7 +11,7 @@ class VenDiagramController extends Controller
     {
         $data = Translate::where("group", "venn_diagram")->get()->map(function ($item) use ($locale) {
             return [
-                'value' => $item->value[$locale] ?? null,
+                'value' => $item->value,
             ];
         });
 
