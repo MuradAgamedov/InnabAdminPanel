@@ -17,12 +17,14 @@ class Translate extends Model
      */
     protected $guarded = [];
     public $translatable = ['value'];
-
+    protected $casts = [
+        'value' => 'array',
+    ];
     protected static function boot()
     {
         parent::boot();
 
-       
+
     }
 
     public function images()
