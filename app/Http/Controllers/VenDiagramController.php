@@ -12,7 +12,7 @@ class VenDiagramController extends Controller
         $values = [];
         foreach($data as $el) {
             dd($el);
-            $values[] = $el['value'][$locale];
+            $values[] = $el->value[$locale];
         }
         return response(['data' => $values]);
     }
