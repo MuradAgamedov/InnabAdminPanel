@@ -1,0 +1,11 @@
+{
+    "name": "ReviewLink",
+    "alias": "reviewlink",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ReviewLink\\Providers\\ReviewLinkServiceProvider"
+    ],
+    "files": []
+}

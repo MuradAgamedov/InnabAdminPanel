@@ -42,6 +42,9 @@
                             <li>
                                 <a href="{{route('menu.index')}}" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&amp;.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&amp;.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark] " data-key="t-analytics"> Menyular </a>
                             </li>
+                            <li>
+                                <a href="{{route('reviewlink.edit', 1)}}" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&amp;.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&amp;.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark] " data-key="t-analytics"> Google şərhlərinin linki </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -62,6 +65,7 @@
                             <li>
                                 <a href="{{route('translate.index')}}" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&amp;.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&amp;.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark] " data-key="t-analytics"> Lüğət </a>
                             </li>
+
                         </ul>
                     </div>
                 </li>

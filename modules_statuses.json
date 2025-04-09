@@ -36,5 +36,6 @@
     "Admin": true,
     "AdminMenuLinks": true,
     "Calculator": true,
-    "Redirect": true
+    "Redirect": true,
+    "ReviewLink": true
 }
