@@ -51,7 +51,7 @@ class Customer extends Model
         $image = $this->imageWithUrl()->first(); // Fetch the image record
 
         if ($image && $image->url) {
-            return config('app.url') . '/' . $image->url;
+            return env("APP_URL") . '/' . $image->url;
         }
 
         return null; // Return null if no image is found

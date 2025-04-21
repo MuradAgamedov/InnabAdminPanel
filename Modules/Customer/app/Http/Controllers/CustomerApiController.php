@@ -11,10 +11,16 @@ class CustomerApiController extends Controller
 {
     public function get_customers(Request $request): JsonResponse
     {
-        // Eager load the 'imageWithUrl' relation to get the full image URL
         $customers = Customer::with('imageWithUrl')->get();
 
-        // Return the customers as JSON response
+        $customers->transform(function ($customer) {
+            $customer->image_url = $customer->imageWithUrl?->url
+                ? env('APP_URL') . '/' . $customer->imageWithUrl->url
+                : null;
+            unset($customer->imageWithUrl); // istəmirsənsə sil
+            return $customer;
+        });
+
         return response()->json($customers);
     }
 }
