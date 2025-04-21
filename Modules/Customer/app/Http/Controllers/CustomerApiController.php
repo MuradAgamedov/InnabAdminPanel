@@ -14,10 +14,9 @@ class CustomerApiController extends Controller
         $customers = Customer::with('imageWithUrl')->get();
 
         $customers->transform(function ($customer) {
-            $customer->image_url = $customer->imageWithUrl?->url
-                ? env('APP_URL') . '/' . $customer->imageWithUrl->url
-                : null;
-            unset($customer->imageWithUrl); // istəmirsənsə sil
+            if ($customer->imageWithUrl && isset($customer->imageWithUrl->url)) {
+                $customer->imageWithUrl->url = config('app.url') . '/' . ltrim($customer->imageWithUrl->url, '/');
+            }
             return $customer;
         });
 
