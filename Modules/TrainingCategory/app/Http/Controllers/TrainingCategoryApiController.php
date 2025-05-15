@@ -88,7 +88,8 @@ class TrainingCategoryApiController extends Controller
                 return response()->json(['success' => false, 'message' => 'No data found'], 404);
             }
 
-            $arr = $items->map(function ($item) use ($lang) {
+            // order ilə sıralayırıq
+            $arr = $items->sortBy('order')->values()->map(function ($item) use ($lang) {
                 return [
                     'id' => $item->id,
                     'title' => $item->title,
@@ -111,40 +112,43 @@ class TrainingCategoryApiController extends Controller
         return $this->executeSafely(function () use ($request, $locale, $id) {
             app()->setLocale($locale); // Dili təyin et
 
-            // Tək bir model dönürsə, kolleksiya deyil
             $category = $this->repository->findWith($id, ['trainings']);
 
             if (!$category) {
                 return response()->json(['success' => false, 'message' => 'No data found'], 404);
             }
 
-            $trainings = $category->trainings->map(function ($item) use ($locale) {
-                $image = !empty($item->images) && isset($item->images[0]['url']) ? $item->images[0]['url'] : null;
-                return [
-                    'id' => $item->id,
-                    'title' => $item->title,
-                    'icon' => $item->images ? config('app.url') . '/' . $image : null,
-                    'main_image' => optional($item->main_images)->where('type', "main_image_training_" . $locale)->first()
-                        ? config('app.url') . '/' . optional($item->main_images)->where('type', "main_image_training_" . $locale)->first()->url
-                        : null,
-                    'file' => optional($item->files)->where('type', "education_plan_" . $locale)->first()
-                        ? config('app.url') . '/' . optional($item->files)->where('type', "education_plan_" . $locale)->first()->url
-                        : null,
-                    'slug' => $item->slug,
-                    'short_description' => $item->short_description,
-                    'top_text_title' => $item->top_text_title,
-                    'top_text' => $item->top_text,
-                    'bottom_text_title' => $item->bottom_text_title,
-                    'bottom_text' => $item->bottom_text,
-                    'seo_title' => $item->seo_title,
-                    'list' => $item->list,
-                    'seo_keywords' => $item->seo_keywords,
-                    'seo_description' => $item->seo_description,
-                    'seo_links' => $item->seo_links,
-                    'seo_scripts' => $item->seo_scripts,
-                    'image_alt' => $item->image_alt,
-                ];
-            });
+            // trainings-ləri order sütununa görə sıralayırıq
+            $trainings = $category->trainings
+                ->sortBy('order') // sıralama burada baş verir
+                ->values() // indeksləri sıfırlamaq üçün
+                ->map(function ($item) use ($locale) {
+                    $image = !empty($item->images) && isset($item->images[0]['url']) ? $item->images[0]['url'] : null;
+                    return [
+                        'id' => $item->id,
+                        'title' => $item->title,
+                        'icon' => $item->images ? config('app.url') . '/' . $image : null,
+                        'main_image' => optional($item->main_images)->where('type', "main_image_training_" . $locale)->first()
+                            ? config('app.url') . '/' . optional($item->main_images)->where('type', "main_image_training_" . $locale)->first()->url
+                            : null,
+                        'file' => optional($item->files)->where('type', "education_plan_" . $locale)->first()
+                            ? config('app.url') . '/' . optional($item->files)->where('type', "education_plan_" . $locale)->first()->url
+                            : null,
+                        'slug' => $item->slug,
+                        'short_description' => $item->short_description,
+                        'top_text_title' => $item->top_text_title,
+                        'top_text' => $item->top_text,
+                        'bottom_text_title' => $item->bottom_text_title,
+                        'bottom_text' => $item->bottom_text,
+                        'seo_title' => $item->seo_title,
+                        'list' => $item->list,
+                        'seo_keywords' => $item->seo_keywords,
+                        'seo_description' => $item->seo_description,
+                        'seo_links' => $item->seo_links,
+                        'seo_scripts' => $item->seo_scripts,
+                        'image_alt' => $item->image_alt,
+                    ];
+                });
 
             return response()->json([
                 'success' => true,
