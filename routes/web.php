@@ -31,7 +31,6 @@ Route::get('/webinar-forms', [WebinarFormController::class, 'index'])->name('web
 Route::get('/webinar-forms/{id}/delete', [WebinarFormController::class, 'destroy'])->name('webinar-forms.destroy');
 Route::get('/webinar-forms/export/csv', [WebinarFormController::class, 'exportCsv'])->name('webinar-forms.export.csv');
 
-Route::get('/all_page_seo/edit/{id}', [AllPageSeoController::class, 'edit'])->name('all_page_seo.edit');
 
 
 

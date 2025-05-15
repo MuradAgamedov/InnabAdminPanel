@@ -28,4 +28,7 @@ Route::prefix('{locale}')->group(function () {
     Route::get('/get_categories', [TrainingCategoryApiController::class, 'get_categories'])->name('trainingcategory.get_categories');
 
     Route::get('/get_training_categories', [TrainingCategoryApiController::class, 'get_training_categories'])->name('trainingcategory.get_training_categories');
+
+
+    Route::get('/get_training_trainings_by_category_id/{id}', [TrainingCategoryApiController::class, 'get_training_trainings_by_category_id'])->name('trainingcategory.get_training_trainings_by_category_id');
 });
