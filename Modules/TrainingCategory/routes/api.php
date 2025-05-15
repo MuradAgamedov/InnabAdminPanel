@@ -26,4 +26,6 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 Route::prefix('{locale}')->group(function () {
     Route::get('/get_categories', [TrainingCategoryApiController::class, 'get_categories'])->name('trainingcategory.get_categories');
+
+    Route::get('/get_training_categories', [TrainingCategoryApiController::class, 'get_training_categories'])->name('trainingcategory.get_training_categories');
 });
