@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\LogoutController;
+use App\Http\Controllers\AllPageSeoController;
 use App\Http\Controllers\ContactFormController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebinarFormController;
@@ -29,6 +30,9 @@ Route::get('/contact-forms/export/csv', [ContactFormController::class, 'exportCs
 Route::get('/webinar-forms', [WebinarFormController::class, 'index'])->name('webinar-forms.index');
 Route::get('/webinar-forms/{id}/delete', [WebinarFormController::class, 'destroy'])->name('webinar-forms.destroy');
 Route::get('/webinar-forms/export/csv', [WebinarFormController::class, 'exportCsv'])->name('webinar-forms.export.csv');
+
+Route::get('/all_page_seo/edit/{id}', [AllPageSeoController::class, 'edit'])->name('all_page_seo.edit');
+
 
 
 

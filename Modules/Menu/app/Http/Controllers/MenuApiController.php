@@ -12,9 +12,7 @@ class MenuApiController extends Controller
 {
     use ExecuteSafely;
 
-    public function __construct(private ModelRepository $repository)
-    {
-    }
+    public function __construct(private ModelRepository $repository) {}
 
     public function get_menu(Request $request): JsonResponse
     {
@@ -39,7 +37,7 @@ class MenuApiController extends Controller
                     'seo_description' => $item->seo_description,
                     'seo_links' => $item->seo_links,
                     'seo_scripts' => $item->seo_scripts,
-                    'parent_id' => $item->parent_id,
+                    'parent_id' => $item->parent_id ? (int) $item->parent_id : 0,
                 ];
             });
 
