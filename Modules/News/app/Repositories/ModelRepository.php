@@ -17,11 +17,17 @@ class ModelRepository extends Repository
             ->paginate($limit);
     }
 
-    public function getPinnedData() {
+    public function getPinnedData()
+    {
         return $this->modelClass::where('pinned', 1)->orderBy("pinned_order")->get();
     }
     public function all_activeWith($relations = [])
     {
         return $this->modelClass::orderBy('news_time')->with($relations)->where('status', 1);
+    }
+
+    public function all_activeWithNews($relations = [])
+    {
+        return $this->modelClass::orderByDesc('news_time')->with($relations)->where('status', 1);
     }
 }

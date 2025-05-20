@@ -13,11 +13,9 @@ class NewsApiController extends Controller
 {
     use ExecuteSafely;
 
-    public function __construct(private ModelRepository $repository)
-    {
-    }
+    public function __construct(private ModelRepository $repository) {}
 
- public function get_news(Request $request): JsonResponse
+    public function get_news(Request $request): JsonResponse
     {
         return $this->executeSafely(function () use ($request) {
             $lang = $request->locale;
@@ -28,7 +26,7 @@ class NewsApiController extends Controller
                 app()->setLocale($lang);
             }
 
-            $items = $this->repository->all_activeWith(['image'])->paginate($perPage, ['*'], 'page', $page);
+            $items = $this->repository->all_activeWithNews(['image'])->paginate($perPage, ['*'], 'page', $page);
 
             if ($items->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'No data found'], 404);
