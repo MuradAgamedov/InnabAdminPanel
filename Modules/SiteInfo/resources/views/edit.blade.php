@@ -69,6 +69,16 @@
                                                 </div>
                                             @endforeach
 
+                                            {{-- Xəritə --}}
+                                            <div class="mb-3 w-full">
+                                                <label for="map_{{ $language->code }}" class="inline-block mb-2 text-base font-medium">
+                                                    Xəritə ({{ $language->code }})
+                                                </label>
+                                                <textarea style="height: 200px" name="map[{{ $language->code }}]" 
+                                                          class="w-full form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                                          id="map_{{ $language->code }}">{{ old('map.' . $language->code, $model->getTranslation('map', $language->code)) }}</textarea>
+                                            </div>
+
                                         </div>
                                     </div>
                                     @php
@@ -130,13 +140,6 @@
                                 <div class="mb-3 flex-1">
                                     <label for="email2" class="inline-block mb-2 text-base font-medium">E-poçt 2</label>
                                     <input type="email" id="email2" name="email2" value="{{ old('email2', $model->email2) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap gap-5">
-
-                                <div class="mb-3 flex-1">
-                                    <label for="map" class="inline-block mb-2 text-base font-medium">Xəritə</label>
-                                    <textarea style="height: 200px" name="map" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="map" rows="3">{{ old('map', $model->map) }}</textarea>
                                 </div>
                             </div>
 

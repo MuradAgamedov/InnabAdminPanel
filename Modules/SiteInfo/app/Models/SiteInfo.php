@@ -24,7 +24,8 @@ class SiteInfo extends Model
         'seminar_icon_alt',
         'webinar_icon_alt',
         'workshop_icon_alt',
-        'scholarship_icon_alt'
+        'scholarship_icon_alt',
+        'map'
     ];
 
     protected static function boot()
