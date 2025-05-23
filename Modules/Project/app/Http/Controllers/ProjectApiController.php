@@ -106,6 +106,8 @@ class ProjectApiController extends Controller
             'seo_scripts' => $item->seo_scripts,
             'is_corporative' => $item->is_corporative,
             'is_project' => $item->is_project,
+            'android_link' => $item->android_link,
+            'apple_link' => $item->apple_link,
         ];
 
         return response()->json(['success' => true, 'data' => $arr]);
