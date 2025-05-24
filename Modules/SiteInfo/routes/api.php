@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GoogleDatasController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VenDiagramController;
+use Modules\SiteInfo\Http\Controllers\Api\UsefulForYouIconApiController;
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::post('siteinfo/delete_selected_items', [SiteInfoController::class, 'delete_selected_items'])
@@ -41,6 +42,11 @@ Route::post('/carrier_and_schoolarship/post', [ContactAdminPanelController::clas
 
 
 Route::get('/google_datas/get', [GoogleDatasController::class, 'google_datas'])->name('google_datas.get');
+
+
+Route::prefix('v1')->group(function () {
+    Route::get('/useful-icons', [UsefulForYouIconApiController::class, 'index']);
+});
 
 
 
