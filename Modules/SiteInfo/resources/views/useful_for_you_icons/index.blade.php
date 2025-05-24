@@ -36,14 +36,15 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-center p-4 bg-slate-50 dark:bg-zink-600 rounded-lg">
-                                    @if($icon->icon)
-                                        <img src="{{ asset($icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
-                                    @else
-                                        <div class="text-center text-slate-500 dark:text-zink-200">
-                                            <i class="ri-image-line text-4xl mb-2"></i>
-                                            <p>İkon yoxdur</p>
-                                        </div>
-                                    @endif
+                                @if($icon->icon)
+    <img src="{{ Storage::url($icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
+@else
+    <div class="text-center text-slate-500 dark:text-zink-200">
+        <i class="ri-image-line text-4xl mb-2"></i>
+        <p>İkon yoxdur</p>
+    </div>
+@endif
+
                                 </div>
                             </div>
                         </div>
