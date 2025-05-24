@@ -25,7 +25,12 @@
 
                         <div class="mb-3">
                             <label for="icon" class="inline-block mb-2 text-base font-medium">İkon</label>
-                            <input type="file" name="icon" id="icon" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                            <input type="file" name="icon" id="icon" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" accept="image/*">
+                            <div id="icon-preview" class="mt-2 hidden">
+                                <div class="flex items-center justify-center p-4 bg-slate-50 dark:bg-zink-600 rounded-lg">
+                                    <img src="" alt="Preview" class="w-24 h-24 object-contain">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -38,4 +43,26 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection
+
+@push('scripts')
+<script>
+    document.getElementById('icon').addEventListener('change', function(e) {
+        const preview = document.getElementById('icon-preview');
+        const previewImg = preview.querySelector('img');
+        
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.classList.remove('hidden');
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        } else {
+            preview.classList.add('hidden');
+        }
+    });
+</script>
+@endpush 
