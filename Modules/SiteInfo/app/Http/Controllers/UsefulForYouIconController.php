@@ -36,14 +36,18 @@ class UsefulForYouIconController extends Controller
             if ($request->hasFile('icon')) {
                 $file = $request->file('icon');
                 $path = $file->store('public/icons');
-                $data['icon'] = Storage::url($path);
+    
+                // sadəcə fayl adını çıxarırıq
+                $data['icon'] = basename($path); // yalnız 'filename.png'
             }
-
+    
             UsefulForYouIcon::create($data);
+    
             return redirect()->route('useful-for-you-icons.index')
                 ->with('status', 'İkon uğurla əlavə edildi');
         }, 'useful-for-you-icons.index');
     }
+    
 
     public function edit($id)
     {
