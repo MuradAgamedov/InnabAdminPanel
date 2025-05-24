@@ -32,18 +32,21 @@ class UsefulForYouIconController extends Controller
     {
         return $this->executeSafely(function () use ($request) {
             $data = $request->all();
-            
+    
             if ($request->hasFile('icon')) {
                 $file = $request->file('icon');
-                $path = $file->store('public/icons');
-                $data['icon'] = basename($path); // Save only filename
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension(); // unikal ad
+                $file->move(public_path('icons'), $filename); // public/icons/ qovluğuna köçür
+                $data['icon'] = $filename; // yalnız adını bazaya yaz
             }
-
+    
             UsefulForYouIcon::create($data);
+    
             return redirect()->route('useful-for-you-icons.index')
                 ->with('status', 'İkon uğurla əlavə edildi');
         }, 'useful-for-you-icons.index');
     }
+    
     
 
     public function edit($id)
@@ -53,28 +56,31 @@ class UsefulForYouIconController extends Controller
     }
 
     public function update(Request $request, $id): RedirectResponse
-    {
-        return $this->executeSafely(function () use ($request, $id) {
-            $icon = UsefulForYouIcon::findOrFail($id);
-            $data = $request->all();
+{
+    return $this->executeSafely(function () use ($request, $id) {
+        $icon = UsefulForYouIcon::findOrFail($id);
+        $data = $request->all();
 
-            if ($request->hasFile('icon')) {
-                // Delete old icon if exists
-                if ($icon->icon) {
-                    Storage::delete('public/icons/' . $icon->icon);
-                }
-
-                // Store new icon
-                $file = $request->file('icon');
-                $path = $file->store('public/icons');
-                $data['icon'] = basename($path); // Save only filename
+        if ($request->hasFile('icon')) {
+            // köhnə faylı sil
+            if ($icon->icon && file_exists(public_path('icons/' . $icon->icon))) {
+                unlink(public_path('icons/' . $icon->icon));
             }
 
-            $icon->update($data);
-            return redirect()->route('useful-for-you-icons.index')
-                ->with('status', 'İkon uğurla yeniləndi');
-        }, 'useful-for-you-icons.index');
-    }
+            // yenisini yadda saxla
+            $file = $request->file('icon');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('icons'), $filename);
+            $data['icon'] = $filename;
+        }
+
+        $icon->update($data);
+
+        return redirect()->route('useful-for-you-icons.index')
+            ->with('status', 'İkon uğurla yeniləndi');
+    }, 'useful-for-you-icons.index');
+}
+
 
     public function destroy($id)
     {
@@ -82,9 +88,10 @@ class UsefulForYouIconController extends Controller
             $icon = UsefulForYouIcon::findOrFail($id);
             
             // Delete icon file if exists
-            if ($icon->icon) {
-                Storage::delete('public/icons/' . $icon->icon);
+            if ($icon->icon && file_exists(public_path('icons/' . $icon->icon))) {
+                unlink(public_path('icons/' . $icon->icon));
             }
+            
 
             $icon->delete();
             return redirect()->route('useful-for-you-icons.index')
