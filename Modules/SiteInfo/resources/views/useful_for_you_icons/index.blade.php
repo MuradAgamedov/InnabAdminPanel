@@ -33,9 +33,12 @@
                                     <td>{{ $icon->type_text }}</td>
                                     <td>
                                         @if($icon->icon)
-                                            <img src="{{ asset($icon->icon) }}" alt="Icon" class="w-16 h-16 object-contain">
+                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
                                         @else
-                                            <span class="text-muted">İkon yoxdur</span>
+                                            <div class="text-center text-slate-500 dark:text-zink-200">
+                                                <i class="ri-image-line text-4xl mb-2"></i>
+                                                <p>İkon yoxdur</p>
+                                            </div>
                                         @endif
                                     </td>
                                     <td>
@@ -55,11 +58,14 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">Məlumat tapılma                                @if($icon->icon)
-    <img src="{{ \Illuminate\Support\Facades\Storage::url($icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
-@else
-    <div class="text-center text-slate-500 dark:text-zink-200">
-        <i class="ri-image-line text-4xl mb-2"></i>
-        <p>İkon yoxdur</p>
+                                    <td colspan="4" class="text-center">Məlumat tapılmadı</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-@endif
+</div>
+@endsection
