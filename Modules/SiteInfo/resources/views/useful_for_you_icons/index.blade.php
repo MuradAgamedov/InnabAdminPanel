@@ -8,35 +8,54 @@
                 <h5 class="text-16">İkonlar</h5>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{ route('useful-for-you-icons.create') }}" class="btn bg-custom-500 text-white border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
-                    <i class="ri-add-line align-middle me-1"></i> Yeni İkon
+                <a href="{{ route('useful-for-you-icons.create') }}" class="btn bg-custom-500 text-white">
+                    <i class="ri-add-line align-bottom me-1"></i> Yeni İkon
                 </a>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    @forelse($icons as $icon)
-                        <div class="card border border-slate-200 dark:border-zink-500">
-                            <div class="card-body">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h6 class="text-15">{{ $icon->type_text }}</h6>
-                                    <div class="flex items-center gap-2">
-                                        <a href="{{ route('useful-for-you-icons.edit', $icon->id) }}" class="btn btn-sm bg-custom-500 text-white border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
-                                            <i class="ri-edit-line"></i>
-                                        </a>
-                                        <form action="{{ route('useful-for-you-icons.destroy', $icon->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm bg-danger text-white border-danger hover:text-white hover:bg-danger-600 hover:border-danger-600 focus:text-white focus:bg-danger-600 focus:border-danger-600 focus:ring focus:ring-danger-100 active:text-white active:bg-danger-600 active:border-danger-600 active:ring active:ring-danger-100 dark:ring-danger-400/20" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center p-4 bg-slate-50 dark:bg-zink-600 rounded-lg">
-                                @if($icon->icon)
+                <div class="table-responsive">
+                    <table class="table-striped table-bordered table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tip</th>
+                                <th>İkon</th>
+                                <th>Əməliyyatlar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($icons as $icon)
+                                <tr>
+                                    <td>{{ $icon->id }}</td>
+                                    <td>{{ $icon->type_text }}</td>
+                                    <td>
+                                        @if($icon->icon)
+                                            <img src="{{ asset($icon->icon) }}" alt="Icon" class="w-16 h-16 object-contain">
+                                        @else
+                                            <span class="text-muted">İkon yoxdur</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center gap-2">
+                                            <a href="{{ route('useful-for-you-icons.edit', $icon->id) }}" class="btn btn-sm bg-custom-500 text-white">
+                                                <i class="ri-edit-line"></i>
+                                            </a>
+                                            <form action="{{ route('useful-for-you-icons.destroy', $icon->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm bg-danger text-white" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+                                                    <i class="ri-delete-bin-line"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">Məlumat tapılma                                @if($icon->icon)
     <img src="{{ \Illuminate\Support\Facades\Storage::url($icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
 @else
     <div class="text-center text-slate-500 dark:text-zink-200">
@@ -44,30 +63,3 @@
         <p>İkon yoxdur</p>
     </div>
 @endif
-
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="col-span-full">
-                            <div class="card border border-slate-200 dark:border-zink-500">
-                                <div class="card-body">
-                                    <div class="text-center py-8">
-                                        <i class="ri-inbox-line text-4xl text-slate-400 dark:text-zink-200 mb-3"></i>
-                                        <h5 class="text-15 text-slate-500 dark:text-zink-200">Məlumat tapılmadı</h5>
-                                        <p class="text-slate-400 dark:text-zink-300">İkon əlavə etmək üçün "Yeni İkon" düyməsini istifadə edin.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforelse
-                </div>
-
-                <div class="mt-6">
-                    {{ $icons->links() }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection 
