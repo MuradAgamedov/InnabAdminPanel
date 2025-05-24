@@ -8,6 +8,7 @@ use App\Services\ServiceContainer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\SiteInfo\Models\UsefulForYouIcon;
+use Illuminate\Support\Facades\Storage;
 
 class UsefulForYouIconController extends Controller
 {
@@ -30,7 +31,15 @@ class UsefulForYouIconController extends Controller
     public function store(Request $request): RedirectResponse
     {
         return $this->executeSafely(function () use ($request) {
-            UsefulForYouIcon::create($request->all());
+            $data = $request->all();
+            
+            if ($request->hasFile('icon')) {
+                $file = $request->file('icon');
+                $path = $file->store('public/icons');
+                $data['icon'] = Storage::url($path);
+            }
+
+            UsefulForYouIcon::create($data);
             return redirect()->route('useful-for-you-icons.index')
                 ->with('status', 'İkon uğurla əlavə edildi');
         }, 'useful-for-you-icons.index');
@@ -45,8 +54,23 @@ class UsefulForYouIconController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         return $this->executeSafely(function () use ($request, $id) {
-            $item = UsefulForYouIcon::findOrFail($id);
-            $item->update($request->all());
+            $icon = UsefulForYouIcon::findOrFail($id);
+            $data = $request->all();
+
+            if ($request->hasFile('icon')) {
+                // Delete old icon if exists
+                if ($icon->icon) {
+                    $oldPath = str_replace('/storage/', 'public/', $icon->icon);
+                    Storage::delete($oldPath);
+                }
+
+                // Store new icon
+                $file = $request->file('icon');
+                $path = $file->store('public/icons');
+                $data['icon'] = Storage::url($path);
+            }
+
+            $icon->update($data);
             return redirect()->route('useful-for-you-icons.index')
                 ->with('status', 'İkon uğurla yeniləndi');
         }, 'useful-for-you-icons.index');
@@ -55,8 +79,15 @@ class UsefulForYouIconController extends Controller
     public function destroy($id)
     {
         return $this->executeSafely(function () use ($id) {
-            $item = UsefulForYouIcon::findOrFail($id);
-            $item->delete();
+            $icon = UsefulForYouIcon::findOrFail($id);
+            
+            // Delete icon file if exists
+            if ($icon->icon) {
+                $path = str_replace('/storage/', 'public/', $icon->icon);
+                Storage::delete($path);
+            }
+
+            $icon->delete();
             return redirect()->route('useful-for-you-icons.index')
                 ->with('status', 'İkon uğurla silindi');
         }, 'useful-for-you-icons.index');
