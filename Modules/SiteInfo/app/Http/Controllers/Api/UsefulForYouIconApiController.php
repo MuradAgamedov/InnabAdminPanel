@@ -14,7 +14,7 @@ class UsefulForYouIconApiController extends Controller
                 'id' => $icon->id,
                 'type' => $icon->type,
                 'type_text' => $icon->type_text,
-                'icon' => $icon->icon ? asset($icon->icon) : null,
+                'icon' => $icon->icon ? asset('icons/'.$icon->icon) : null,
             ];
         });
 
