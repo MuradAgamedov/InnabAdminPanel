@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\SiteInfo\Http\Controllers\SiteInfoController;
+use Modules\SiteInfo\Http\Controllers\UsefulForYouIconController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use Modules\SiteInfo\Http\Controllers\SiteInfoController;
 |
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     // 'index' metodu için 'checkpermission:6,1' middleware'i uygulandı
     Route::get('/siteinfo', [SiteInfoController::class, 'index'])
         ->middleware('checkpermission:6,1')
@@ -64,4 +65,33 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/siteinfo/deleteFile/{id}', [SiteInfoController::class, 'deleteFile'])
         ->middleware('checkpermission:6,3')
         ->name('siteinfo.deleteFile');
+
+    // Useful For You Icons Routes
+    Route::get('/useful-for-you-icons', [UsefulForYouIconController::class, 'index'])
+        ->middleware('checkpermission:6,1')
+        ->name('useful-for-you-icons.index');
+
+    Route::get('/useful-for-you-icons/create', [UsefulForYouIconController::class, 'create'])
+        ->middleware('checkpermission:6,2')
+        ->name('useful-for-you-icons.create');
+
+    Route::post('/useful-for-you-icons', [UsefulForYouIconController::class, 'store'])
+        ->middleware('checkpermission:6,2')
+        ->name('useful-for-you-icons.store');
+
+    Route::get('/useful-for-you-icons/{id}/edit', [UsefulForYouIconController::class, 'edit'])
+        ->middleware('checkpermission:6,3')
+        ->name('useful-for-you-icons.edit');
+
+    Route::put('/useful-for-you-icons/{id}', [UsefulForYouIconController::class, 'update'])
+        ->middleware('checkpermission:6,3')
+        ->name('useful-for-you-icons.update');
+
+    Route::delete('/useful-for-you-icons/{id}', [UsefulForYouIconController::class, 'destroy'])
+        ->middleware('checkpermission:6,4')
+        ->name('useful-for-you-icons.destroy');
+
+    Route::get('/useful-for-you-icons/change-status/{id}', [UsefulForYouIconController::class, 'changeStatus'])
+        ->middleware('checkpermission:6,3')
+        ->name('useful-for-you-icons.change-status');
 });
