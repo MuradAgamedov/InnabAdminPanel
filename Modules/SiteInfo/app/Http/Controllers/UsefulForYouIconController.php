@@ -36,13 +36,10 @@ class UsefulForYouIconController extends Controller
             if ($request->hasFile('icon')) {
                 $file = $request->file('icon');
                 $path = $file->store('public/icons');
-    
-                // sadəcə fayl adını çıxarırıq
-                $data['icon'] = basename($path); // yalnız 'filename.png'
+                $data['icon'] = basename($path); // Save only filename
             }
-    
+
             UsefulForYouIcon::create($data);
-    
             return redirect()->route('useful-for-you-icons.index')
                 ->with('status', 'İkon uğurla əlavə edildi');
         }, 'useful-for-you-icons.index');
@@ -64,14 +61,13 @@ class UsefulForYouIconController extends Controller
             if ($request->hasFile('icon')) {
                 // Delete old icon if exists
                 if ($icon->icon) {
-                    $oldPath = str_replace('/storage/', 'public/', $icon->icon);
-                    Storage::delete($oldPath);
+                    Storage::delete('public/icons/' . $icon->icon);
                 }
 
                 // Store new icon
                 $file = $request->file('icon');
                 $path = $file->store('public/icons');
-                $data['icon'] = Storage::url($path);
+                $data['icon'] = basename($path); // Save only filename
             }
 
             $icon->update($data);
@@ -87,8 +83,7 @@ class UsefulForYouIconController extends Controller
             
             // Delete icon file if exists
             if ($icon->icon) {
-                $path = str_replace('/storage/', 'public/', $icon->icon);
-                Storage::delete($path);
+                Storage::delete('public/icons/' . $icon->icon);
             }
 
             $icon->delete();
