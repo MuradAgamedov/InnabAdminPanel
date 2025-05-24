@@ -8,8 +8,8 @@
                 <h5 class="text-16">İkonlar</h5>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{ route('useful-for-you-icons.create') }}" class="btn bg-custom-500 text-white">
-                    <i class="ri-add-line align-bottom me-1"></i> Yeni İkon
+                <a href="{{ route('useful-for-you-icons.create') }}" class="btn bg-custom-500 text-white border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
+                    <i class="ri-add-line align-middle me-1"></i> Yeni İkon
                 </a>
             </div>
         </div>
@@ -33,23 +33,20 @@
                                     <td>{{ $icon->type_text }}</td>
                                     <td>
                                         @if($icon->icon)
-                                            <img src="{{ asset('/icons/' . $icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
+                                            <img src="{{ asset('icons/' . $icon->icon) }}" alt="Icon" class="w-16 h-16 object-contain">
                                         @else
-                                            <div class="text-center text-slate-500 dark:text-zink-200">
-                                                <i class="ri-image-line text-4xl mb-2"></i>
-                                                <p>İkon yoxdur</p>
-                                            </div>
+                                            <span class="text-muted">İkon yoxdur</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="flex items-center gap-2">
-                                            <a href="{{ route('useful-for-you-icons.edit', $icon->id) }}" class="btn btn-sm bg-custom-500 text-white">
+                                            <a href="{{ route('useful-for-you-icons.edit', $icon->id) }}" class="btn btn-sm bg-custom-500 text-white border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
                                                 <i class="ri-edit-line"></i>
                                             </a>
                                             <form action="{{ route('useful-for-you-icons.destroy', $icon->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm bg-danger text-white" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+                                                <button type="submit" class="btn btn-sm bg-danger text-white border-danger hover:text-white hover:bg-danger-600 hover:border-danger-600 focus:text-white focus:bg-danger-600 focus:border-danger-600 focus:ring focus:ring-danger-100 active:text-white active:bg-danger-600 active:border-danger-600 active:ring active:ring-danger-100 dark:ring-danger-400/20" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </button>
                                             </form>
@@ -63,6 +60,10 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+
+                <div class="mt-4">
+                    {{ $icons->links() }}
                 </div>
             </div>
         </div>
