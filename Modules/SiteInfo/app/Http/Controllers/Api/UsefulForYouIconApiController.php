@@ -9,6 +9,7 @@ class UsefulForYouIconApiController extends Controller
 {
     public function index()
     {
+        dd(1);
         $icons = UsefulForYouIcon::all()->map(function ($icon) {
             return [
                 'id' => $icon->id,

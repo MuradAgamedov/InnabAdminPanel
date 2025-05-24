@@ -44,9 +44,7 @@ Route::post('/carrier_and_schoolarship/post', [ContactAdminPanelController::clas
 Route::get('/google_datas/get', [GoogleDatasController::class, 'google_datas'])->name('google_datas.get');
 
 
-Route::prefix('v1')->group(function () {
     Route::get('/useful-icons', [UsefulForYouIconApiController::class, 'index']);
-});
 
 
 
