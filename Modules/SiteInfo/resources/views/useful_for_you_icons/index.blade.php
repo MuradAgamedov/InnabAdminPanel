@@ -33,7 +33,7 @@
                                     <td>{{ $icon->type_text }}</td>
                                     <td>
                                         @if($icon->icon)
-                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
+                                            <img src="{{ asset('storage/icons/' . $icon->icon) }}" alt="{{ $icon->type_text }}" class="w-24 h-24 object-contain">
                                         @else
                                             <div class="text-center text-slate-500 dark:text-zink-200">
                                                 <i class="ri-image-line text-4xl mb-2"></i>
