@@ -17,10 +17,7 @@ class MenuApiController extends Controller
 
     public function get_menu(Request $request): JsonResponse
     {
-        $menus = cache()->remember('menus_all', 60 * 60, function () {
-            return Menu::select(['id', 'title', 'slug'])->get();
-        });
 
-        return response()->json($menus);
+        return response()->json(1);
     }
 }
