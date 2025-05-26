@@ -17,7 +17,8 @@ class Menu extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
-    public $translatable = ['title', 'slug','seo_title', 'seo_keywords', 'seo_description'];
+    protected $hidden = ['created_at', 'updated_at'];
+    public $translatable = ['title', 'slug', 'seo_title', 'seo_keywords', 'seo_description'];
 
 
     public function images()
@@ -29,6 +30,4 @@ class Menu extends Model
     {
         //return MenuFactory::new();
     }
-
-
 }
