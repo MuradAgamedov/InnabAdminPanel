@@ -273,6 +273,27 @@
                                 </div>
                             </div>
 
+                            <div class="flex flex-wrap gap-5">
+                                <div class="mb-3 flex-1">
+                                    <label for="favicon" class="inline-block mb-2 text-base font-medium">Favicon</label>
+                                    <div class="wrapper_image relative w-64 h-24">
+                                        @foreach($model->images->where('type', 'favicon') as $image)
+                                        <div class="relative w-64 h-24">
+                                            <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
+                                                <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
+                                            </a>
+                                            <a href="{{ route('training.deleteFile', $image->id) }}" style="cursor: pointer; position: absolute; top: 0; right: 0; background-color: red; color: white; padding: 6px;" class="delete_image" data-id="{{ $image->id }}">
+                                                X
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3">
+                                        <input multiple name="favicon[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="submit" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
                                 Yenilə
                             </button>
