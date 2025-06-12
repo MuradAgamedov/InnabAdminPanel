@@ -7,7 +7,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Menu\Repositories\ModelRepository;
 use App\Traits\ExecuteSafely;
-use Modules\Menu\Models\Menu;
 
 class MenuApiController extends Controller
 {
@@ -17,10 +16,32 @@ class MenuApiController extends Controller
 
     public function get_menu(Request $request): JsonResponse
     {
-        $menus = cache()->remember('menus_all', 60 * 60, function () {
-            return Menu::select(['id', 'title', 'slug'])->get();
-        });
+        return $this->executeSafely(function () use ($request) {
+            $items = $this->repository->all_active();
+            $lang = $request->locale;
 
-        return response()->json($menus);
+            if ($lang) {
+                app()->setLocale($lang);
+            }
+
+            if ($items->isEmpty()) {
+                return response()->json(['success' => false, 'message' => 'No data found'], 404);
+            }
+
+            $arr = $items->map(function ($item) {
+                return [
+                    'title' => $item->title,
+                    'slug' => $item->slug,
+                    'seo_title' => $item->seo_title,
+                    'seo_keywords' => $item->seo_keywords,
+                    'seo_description' => $item->seo_description,
+                    'seo_links' => $item->seo_links,
+                    'seo_scripts' => $item->seo_scripts,
+                    'parent_id' => $item->parent_id ? (int) $item->parent_id : 0,
+                ];
+            });
+
+            return response()->json(['success' => true, 'data' => $arr]);
+        }, null, true);
     }
 }
