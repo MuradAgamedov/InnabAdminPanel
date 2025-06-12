@@ -67,7 +67,10 @@ class SiteInfo extends Model
     {
         return $this->hasOne(SystemFiles::class, 'relation_id')->where('model_type', 'siteinfo')->where('file_type', 'image')->where('type', 'scholarship_icon')->select('url', 'relation_id');
     }
-
+    public function favicon()
+    {
+        return $this->hasOne(SystemFiles::class, 'relation_id')->where('model_type', 'siteinfo')->where('file_type', 'image')->where('type', 'favicon')->select('url', 'relation_id');
+    }
     protected static function newFactory(): SiteInfoFactory
     {
         //return SiteInfoFactory::new();

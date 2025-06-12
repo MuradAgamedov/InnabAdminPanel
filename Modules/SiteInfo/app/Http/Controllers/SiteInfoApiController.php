@@ -22,7 +22,7 @@ class SiteInfoApiController extends Controller
             if($lang) {
                 app()->setLocale($lang);
             }
-            return response()->json(['success' => true, 'data' => SiteInfo::with(['header_footer', 'header_top', 'header_image', 'vebinar_icon', 'workshop_icon', 'scholarship_icon'])->get()]);
+            return response()->json(['success' => true, 'data' => SiteInfo::with(['header_footer', 'header_top', 'header_image', 'vebinar_icon', 'workshop_icon', 'scholarship_icon', 'favicon'])->get()]);
         }, null, true);
     }
 }
