@@ -381,7 +381,7 @@
 </script>
 <script>
     async function clearCache() {
-        await fetch('https://innab.edu.az/api/revalidate-all', {
+        await fetch('https://www.innab.edu.az/api/revalidate-all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
