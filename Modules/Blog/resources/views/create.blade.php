@@ -108,7 +108,7 @@
     @endsection
 
     @push('scripts')
-    <script src="{{ asset('Modules/Blog/assets/js/app.js') }}"></script>
+    <script src="{{ asset('panel/assets/js/blog-slug-generator.js') }}"></script>
     <script>
         document.querySelectorAll('.ckeditortext').forEach((textarea) => {
             CKEDITOR.replace(textarea);
