@@ -234,44 +234,34 @@ const characterMap = {
  * @returns {string} - URL-friendly slug
  */
 function generateSlug(text) {
-    console.log('Generating slug for text:', text);
-    
     if (!text) return '';
 
     let slug = text.toString();
-    console.log('Original slug:', slug);
 
     // Convert to lowercase
     slug = slug.toLowerCase();
-    console.log('After lowercase:', slug);
 
     // Replace special characters with their Latin equivalents
     for (const [char, replacement] of Object.entries(characterMap)) {
         slug = slug.replace(new RegExp(escapeRegExp(char), 'g'), replacement);
     }
-    console.log('After character replacement:', slug);
 
     // Remove any remaining non-alphanumeric characters except hyphens and underscores
     slug = slug.replace(/[^a-z0-9\-_]/g, '-');
-    console.log('After removing special chars:', slug);
 
     // Replace multiple consecutive hyphens with a single hyphen
     slug = slug.replace(/-+/g, '-');
-    console.log('After replacing multiple hyphens:', slug);
 
     // Remove leading and trailing hyphens
     slug = slug.replace(/^-+|-+$/g, '');
-    console.log('After removing leading/trailing hyphens:', slug);
 
     // Limit length to 60 characters
     if (slug.length > 60) {
         slug = slug.substring(0, 60);
         // Remove trailing hyphen if it exists
         slug = slug.replace(/-+$/, '');
-        console.log('After length limit:', slug);
     }
 
-    console.log('Final slug:', slug);
     return slug;
 }
 
@@ -322,15 +312,10 @@ function showNotification(message, type = 'info') {
  * Initialize automatic slug generation for blog forms
  */
 function initBlogSlugGeneration() {
-    console.log('Initializing blog slug generation...');
-    console.log('Document ready state:', document.readyState);
-    
     // Wait for DOM to be ready
     if (document.readyState === 'loading') {
-        console.log('DOM is loading, adding event listener...');
         document.addEventListener('DOMContentLoaded', setupSlugGeneration);
     } else {
-        console.log('DOM is ready, setting up immediately...');
         setupSlugGeneration();
     }
 }
@@ -339,36 +324,24 @@ function initBlogSlugGeneration() {
  * Setup slug generation for all language tabs
  */
 function setupSlugGeneration() {
-    console.log('Setting up slug generation...');
-    
     // Find all title inputs across language tabs
     const titleInputs = document.querySelectorAll('input[name^="title["]');
     const slugInputs = document.querySelectorAll('input[name^="slug["]');
-
-    console.log('Found title inputs:', titleInputs.length);
-    console.log('Found slug inputs:', slugInputs.length);
 
     // Create a map of title inputs to their corresponding slug inputs
     const titleToSlugMap = new Map();
 
     titleInputs.forEach((titleInput, index) => {
         const titleName = titleInput.getAttribute('name');
-        console.log('Title input name:', titleName);
-        
         const languageCode = titleName.match(/\[([^\]]+)\]/)[1];
-        console.log('Language code:', languageCode);
-        
         const slugInput = document.querySelector(`input[name="slug[${languageCode}]"]`);
-        console.log('Found slug input:', slugInput);
         
         if (slugInput) {
             titleToSlugMap.set(titleInput, slugInput);
             
             // Add event listeners for real-time slug generation
             titleInput.addEventListener('input', (e) => {
-                console.log('Title input changed:', e.target.value);
                 const slug = generateSlug(e.target.value);
-                console.log('Generated slug:', slug);
                 slugInput.value = slug;
             });
 
@@ -389,8 +362,6 @@ function setupSlugGeneration() {
             });
         }
     });
-
-    console.log('Title to slug map size:', titleToSlugMap.size);
 
     // Add a global button to regenerate all slugs
     addRegenerateSlugsButton(titleToSlugMap);
