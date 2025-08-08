@@ -116,14 +116,14 @@
                                     <input type="text" id="youtube_link" name="youtube_link" value="{{ old('youtube_link', $model->youtube_link) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                 </div>
                                 <div class="mb-3 flex-1">
-                                    <label for="phone1" class="inline-block mb-2 text-base font-medium">Fiziki şəxslər üçün telefon nömrəsi:</label>
+                                    <label for="phone1" class="inline-block mb-2 text-base font-medium">Elmlər filialı:</label>
                                     <input type="text" id="phone1" name="phone1" value="{{ old('phone1', $model->phone1) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                 </div>
                             </div>
 
                             <div class="flex flex-wrap gap-5">
                                 <div class="mb-3 flex-1">
-                                    <label for="phone2" class="inline-block mb-2 text-base font-medium">Korporativ müştərilər üçün telefon nömrəsi:</label>
+                                    <label for="phone2" class="inline-block mb-2 text-base font-medium">Gənclik filialı:</label>
                                     <input type="text" id="phone2" name="phone2" value="{{ old('phone2', $model->phone2) }}" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
                                 </div>
                                 <div class="mb-3 flex-1">
