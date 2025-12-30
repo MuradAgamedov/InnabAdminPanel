@@ -29,7 +29,7 @@ class TrainingSubjectApiConteoller extends Controller
             }
 
             if ($items->isEmpty()) {
-                return response()->json(['success' => false, 'message' => 'No data found', "data" => []], 404);
+                return response()->json(['success' => false, 'message' => 'No data found', "data" => []], 200);
             }   
         
 
