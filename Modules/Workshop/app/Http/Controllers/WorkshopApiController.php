@@ -26,9 +26,9 @@ class WorkshopApiController extends Controller
                 app()->setLocale($lang);
             }
 
-            if ($items->isEmpty()) {
-                return response()->json(['success' => false, 'message' => 'No data found'], 404);
-            }
+            // if ($items->isEmpty()) {
+            //     return response()->json(['success' => false, 'message' => 'No data found'], 404);
+            // }
 
            $arr = $items->map(function ($item) use ($lang) {
                 $image = $item->images ? $item->images->where('type', "image_".$lang)->first() : null;
