@@ -28,9 +28,9 @@ class VideoLessonsApiController extends Controller
             app()->setLocale($lang);
         }
 
-        if ($items->isEmpty()) {
-            return response()->json(['success' => false, 'message' => 'No data found'], 404);
-        }
+        // if ($items->isEmpty()) {
+        //     return response()->json(['success' => false, 'message' => 'No data found'], 404);
+        // }
 
         $arr = $items->map(function ($item) {
             return [
